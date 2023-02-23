@@ -2,9 +2,9 @@
 import android.annotation.SuppressLint
 import java.math.BigDecimal
 import java.sql.Timestamp
+import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
@@ -20,6 +20,8 @@ object DateUtils {
     val BASETIME = BigDecimal("60.00")
     val DATE_PATTERN =
         Pattern.compile("^(?:(?!0000)[0-9]{4}([-/.]?)(?:(?:0?[1-9]|1[0-2])([-/.]?)(?:0?[1-9]|1[0-9]|2[0-8])|(?:0?[13-9]|1[0-2])([-/.]?)(?:29|30)|(?:0?[13578]|1[02])([-/.]?)31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)([-/.]?)0?2([-/.]?)29)$")
+
+    val timeZone: TimeZone = TimeZone.getTimeZone("UTC")
 
     fun validateDateFormat(dateText: String?): Boolean {
         return DATE_PATTERN.matcher(dateText).matches()
@@ -41,7 +43,7 @@ object DateUtils {
 
     @SuppressLint("SimpleDateFormat")
     fun formatDate(date: Date?, formatStr: String?): String {
-        return SimpleDateFormat(formatStr ?: DEFAULT_FORMAT_DATE).format(
+        return SimpleDateFormat(formatStr ?: DEFAULT_FORMAT_DATE,Locale.getDefault()).format(
             date!!
         )
     }
@@ -49,9 +51,11 @@ object DateUtils {
     @SuppressLint("SimpleDateFormat")
     @Throws(ParseException::class)
     fun formatDate(dateStr: String?, formatStr: String?): Date {
-        return SimpleDateFormat(formatStr ?: DEFAULT_FORMAT_DATE).parse(
-            dateStr!!
-        )!!
+
+        val formatter = SimpleDateFormat(formatStr?: DEFAULT_FORMAT_DATE, Locale.getDefault())
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        val result = formatter.parse(dateStr!!)
+        return result!!
     }
 
     fun formatTime(dateStr: String?): Timestamp {
@@ -545,6 +549,7 @@ object DateUtils {
 
         return isSameDaynew(other,now)
     }
+
 
 
 

@@ -4,18 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/valo_bg_color"
-    tools:context=".ui.fragment.brackets.BracketsFragment">
+    android:layout_height="match_parent">
 
 
     <com.ventura.bracketslib.BracketsView
         android:id="@+id/bracket_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:bracketBackgroundColor="#1c222e"
+        app:bracketColor="#262e40"
+        app:bracketTextColor="#fff" />
 
 </FrameLayout>

@@ -69,7 +69,7 @@ class UpcomingMatchesAdapter : RecyclerView.Adapter<UpcomingMatchesAdapter.Image
                     ///transformations(CircleCropTransformation())
                 }
 
-            val formatedDate : Date = DateUtils.formatDate(currImage.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
+            var formatedDate : Date = DateUtils.formatDate(currImage.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
             val nowDate : Date = DateUtils.now()
             val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
 

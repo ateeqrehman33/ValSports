@@ -1,6 +1,5 @@
 package com.halil.ozel.unsplashexample.ui.fragment.brackets
 
-import android.R
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,10 +28,17 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBracketsBinding.inflate(layoutInflater)
+
+        val baseInflater = LayoutInflater.from(requireActivity()) // NOT context
+        binding = FragmentBracketsBinding.inflate(baseInflater)
 
 
-        val bracketsView = binding.bracketView
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupData()
 
         val player1 = CompetitorData("Player 1", "3")
         val player2 = CompetitorData("Player 2", "1")
@@ -55,36 +61,31 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
         val match3Final = MatchData(player2, player7)
 
         val quarterFinalColomn = ColomnData(
-            Arrays.asList(
+            mutableListOf(
                 matchQuarterFinal1,
                 matchQuarterFinal2,
                 matchQuarterFinal3,
                 matchQuarterFinal4
             )
         )
-        val semiFinalColomn = ColomnData(Arrays.asList(match1SemiFinal, match2SemiFinal))
-        val finalColomn = ColomnData(Arrays.asList(match3Final))
+        val semiFinalColomn = ColomnData(mutableListOf(match1SemiFinal, match2SemiFinal))
+        val finalColomn = ColomnData(mutableListOf(match3Final))
 
-        bracketsView.setBracketsData(
-            Arrays.asList(
+        binding.bracketView.setBracketsData(
+            mutableListOf(
                 quarterFinalColomn,
                 semiFinalColomn,
                 finalColomn
             )
         )
-
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupData()
     }
 
     private fun setupData() {
+
         viewModel.responseImages.observe(requireActivity()) { response ->
             if (response != null) {
+
+               // val roundOne :
 
 
 
@@ -103,5 +104,8 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
         activity?.lifecycle?.removeObserver(this)
         super.onDetach()
     }
+
+
+
 
 }
