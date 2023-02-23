@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/live_fragment">
+
+    <fragment
+        android:id="@+id/live_fragment"
+        android:name="com.halil.ozel.unsplashexample.ui.fragment.livematches.LiveFragment"
+        android:label="Live"
+        tools:layout="@layout/fragment_live" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/schedule_fragment"
+        android:name="com.halil.ozel.unsplashexample.ui.fragment.schedule.ScheduleFragment"
+        android:label="Schedule"
+        tools:layout="@layout/fragment_schedule" >
+
+    </fragment>
+
+</navigation>

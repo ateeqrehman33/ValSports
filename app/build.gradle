@@ -1,0 +1,108 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-android-extensions'
+
+}
+
+android {
+    compileSdkVersion 33
+    defaultConfig {
+        applicationId "com.halil.ozel.unsplashexample"
+        minSdkVersion 24
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "YOUTUBE_API_KEY", YOUTUBE_API_KEY)
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    /** Retrofit **/
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+
+
+    /** Coroutines **/
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    /** Lifecycle **/
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.activity:activity-ktx:1.6.1"
+
+    /** Dagger Hilt **/
+    implementation "com.google.dagger:hilt-android:2.44"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-process:2.5.1'
+    kapt "com.google.dagger:hilt-android-compiler:2.44"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    /** Coil **/
+    implementation('io.coil-kt:coil:1.4.0')
+
+    //youtube player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+
+
+    //bottom nav and navigation comp
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.5.3'
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+
+
+    // android veil
+    implementation "com.github.skydoves:androidveil:1.1.1"
+
+    //skeletonlayout
+    implementation 'com.faltenreich:skeletonlayout:4.0.0'
+
+
+    // discrete scrollview
+    implementation "com.yarolegovich:discrete-scrollview:1.5.1"
+
+    // transformation
+    implementation "com.github.skydoves:transformationlayout:1.0.8"
+
+    //lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+
+    //bracketview
+    implementation 'com.github.emil-ep:TournamentBracketLib:1.0.4'
+
+
+
+
+}

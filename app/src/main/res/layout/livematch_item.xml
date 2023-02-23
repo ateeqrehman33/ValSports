@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:id="@+id/item_container"
+    android:layout_width="300dp"
+    android:layout_height="230dp"
+    android:background="@drawable/bg_upcoming_matches"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/background800"
+    app:cardCornerRadius="12dp"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginTop="8dp"
+    app:cardElevation="12dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        tools:ignore="UnusedAttribute">
+
+        <com.skydoves.androidveil.VeilLayout
+            android:id="@+id/item_veilLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:veilLayout_baseAlpha="0.9"
+            app:veilLayout_baseColor="@color/colorVeil"
+            app:veilLayout_dropOff="0.5"
+            app:veilLayout_highlightAlpha="1.0"
+            app:veilLayout_radius="12dp"
+            app:veilLayout_shimmerEnable="true"
+            app:veilLayout_veiled="true">
+
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/item_youtubeplayer"
+                android:layout_width="300dp"
+                android:layout_height="130dp"
+                android:scaleType="center"
+                app:layout_constraintDimensionRatio="W,11:20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="300dp"
+                android:layout_height="130dp"
+                android:id="@+id/twitchView"
+                app:layout_constraintDimensionRatio="W,11:20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </com.skydoves.androidveil.VeilLayout>
+
+        <ProgressBar
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/progressTwitch"
+            app:layout_constraintBottom_toBottomOf="@+id/item_veilLayout"
+            app:layout_constraintEnd_toEndOf="@+id/item_veilLayout"
+            app:layout_constraintStart_toStartOf="@+id/item_veilLayout"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@+id/item_veilLayout" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/consDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/background800"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_veilLayout">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/valo_font"
+                android:text="Challengers SEA ID : WEEK 4"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/teamAiv"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/valorant_masters_lightmode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <TextView
+                android:id="@+id/teamAname"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/abeezee_regular"
+                android:gravity="start"
+                android:text="ARF TEAM"
+                android:textColor="@color/md_amber_50"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="@+id/teamAiv"
+                app:layout_constraintTop_toBottomOf="@+id/teamAiv" />
+
+            <ImageView
+                android:id="@+id/teamABiv"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/valorant_masters_lightmode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <TextView
+                android:id="@+id/teamBname"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/abeezee_regular"
+                android:gravity="end"
+                android:text="BOOM Esports"
+                android:textColor="@color/md_amber_50"
+                android:textSize="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/teamABiv"
+                app:layout_constraintTop_toBottomOf="@+id/teamABiv" />
+
+
+            <ImageView
+                android:id="@+id/vs"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/pngwing_com"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
