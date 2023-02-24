@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/teamAiv"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/valorant_masters_lightmode"
@@ -59,8 +59,8 @@
 
         <ImageView
             android:id="@+id/teamABiv"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/valorant_masters_lightmode"

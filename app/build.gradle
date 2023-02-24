@@ -65,11 +65,12 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.44"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-process:2.5.1'
+    implementation project(path: ':BracketsLib')
     kapt "com.google.dagger:hilt-android-compiler:2.44"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
     /** Coil **/
-    implementation('io.coil-kt:coil:1.4.0')
+    implementation('io.coil-kt:coil:2.2.2')
 
     //youtube player
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
@@ -97,10 +98,6 @@ dependencies {
 
     //lottie
     implementation 'com.airbnb.android:lottie:5.2.0'
-
-
-    //bracketview
-    implementation 'com.github.emil-ep:TournamentBracketLib:1.0.4'
 
 
 
