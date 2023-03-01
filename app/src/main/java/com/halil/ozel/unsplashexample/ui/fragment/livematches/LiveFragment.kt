@@ -55,10 +55,14 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver  {
         viewModel.responseImages.observe(requireActivity()) { response ->
             if (response != null && response.isNotEmpty()) {
                 imageAdapter.submitList(response)
+                binding.shimmerFrameLayout.stopShimmer()
+                binding.shimmerFrameLayout.visibility = View.GONE
+                binding.recyclerView.visibility = View.VISIBLE
             }
             else{
                 binding.recyclerView.visibility = View.GONE
                 binding.NodataView.visibility = View.VISIBLE
+                binding.shimmerFrameLayout.visibility = View.GONE
 
             }
         }
@@ -75,6 +79,14 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver  {
         viewModel.responseUpcoming.observe(requireActivity()) { response ->
             if (response != null) {
                 upcomingadapter.submitList(response)
+                binding.shimmerFrameLayoutUpcoming.stopShimmer()
+                binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
+                binding.rvUpcoming.visibility = View.VISIBLE
+            }
+            else{
+                binding.rvUpcoming.visibility = View.GONE
+                binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
+
             }
         }
 
@@ -100,6 +112,18 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver  {
     override fun onDetach() {
         activity?.lifecycle?.removeObserver(this)
         super.onDetach()
+    }
+
+    override fun onResume() {
+        super<Fragment>.onResume()
+        binding.shimmerFrameLayout.startShimmer()
+        binding.shimmerFrameLayoutUpcoming.startShimmer()
+    }
+
+    override fun onPause() {
+        binding.shimmerFrameLayout.stopShimmer()
+        binding.shimmerFrameLayoutUpcoming.stopShimmer()
+        super<Fragment>.onPause()
     }
 
 

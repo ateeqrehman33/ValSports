@@ -4,7 +4,7 @@
     android:layout_height="180dp"
     android:background="@drawable/bg_upcoming_matches"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/darknewbgsec"
+    app:cardBackgroundColor="@color/md_blue_grey_700"
     app:cardCornerRadius="12dp"
     android:layout_marginHorizontal="12dp"
     android:layout_marginTop="8dp"
@@ -33,6 +33,7 @@
             android:text="Challengers SEA ID : WEEK 4"
             android:textColor="@color/colorVeil"
             android:textSize="10dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/lottieAnimationView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/lottieAnimationView2"
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/darknewbgsec"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/otherview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -217,6 +218,7 @@
             android:layout_margin="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             app:lottie_autoPlay="true"
             android:padding="3dp"
             app:lottie_fileName="go_live.json"
@@ -230,22 +232,22 @@
 
 
         <!--        <ImageView-->
-<!--            android:id="@+id/youtube"-->
-<!--            android:layout_width="35dp"-->
-<!--            android:layout_height="35dp"-->
-<!--            android:padding="5dp"-->
-<!--            android:src="@drawable/youtube"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/consDetails"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/consDetails" />-->
+        <!--            android:id="@+id/youtube"-->
+        <!--            android:layout_width="35dp"-->
+        <!--            android:layout_height="35dp"-->
+        <!--            android:padding="5dp"-->
+        <!--            android:src="@drawable/youtube"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/consDetails"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/consDetails" />-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/twitch"-->
-<!--            android:layout_width="35dp"-->
-<!--            android:layout_height="35dp"-->
-<!--            android:padding="5dp"-->
-<!--            android:src="@drawable/twitch2"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/consDetails"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/consDetails" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/twitch"-->
+        <!--            android:layout_width="35dp"-->
+        <!--            android:layout_height="35dp"-->
+        <!--            android:padding="5dp"-->
+        <!--            android:src="@drawable/twitch2"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/consDetails"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/consDetails" />-->
 
 
         <com.google.android.material.card.MaterialCardView
@@ -253,7 +255,7 @@
             style="@style/CustomCardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:cardBackgroundColor="@color/md_blue_grey_800"
+            app:cardBackgroundColor="@color/md_blue_grey_900"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -261,6 +263,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="match_parent">
 
                 <View

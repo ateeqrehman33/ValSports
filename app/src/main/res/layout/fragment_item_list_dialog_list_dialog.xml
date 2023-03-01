@@ -23,33 +23,37 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@drawable/valo_omen_bg"
+            android:background="@color/darknewbgsec"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/valo_font"
+                android:fontFamily="@font/merriweathersans_extrabold"
                 android:text="Home League Filter"
                 android:textColor="@color/white"
                 android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/closeIv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/closeIv"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/close_ic"
-                android:padding="3dp"
+                android:paddingTop="3dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/md_teal_300" />
+                app:layout_constraintTop_toTopOf="@+id/textView3"
+                app:tint="@color/md_red_400" />
 
 
 
@@ -62,7 +66,6 @@
             android:id="@+id/leagueRv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="8dp"
             app:layout_constraintHeight_default="wrap"
             android:background="@color/valo_bg_color"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

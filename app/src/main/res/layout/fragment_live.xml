@@ -82,13 +82,64 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
+
+
+
+
+
+
+            <com.yarolegovich.discretescrollview.DiscreteScrollView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:listitem="@layout/livematch_item" >
+                
+            </com.yarolegovich.discretescrollview.DiscreteScrollView>
+
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerFrameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:visibility="visible"
+                android:layout_marginStart="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                <!-- Adding 15 rows of placeholders -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/skeleton_livematch_item" />
+
+                    <include layout="@layout/skeleton_livematch_item" />
+
+                    <include layout="@layout/skeleton_livematch_item" />
+
+                    <include layout="@layout/skeleton_livematch_item" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/NodataView"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:visibility="gone"
-                app:cardBackgroundColor="@android:color/transparent"
+                app:cardBackgroundColor="@color/darknewbgsec"
                 app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
                 app:cardElevation="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,8 +156,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/merriweathersans_extrabold"
-                        android:text="No live matches..!"
-                        android:textColor="@color/md_deep_purple_200"
+                        android:text="No matches in progress.."
+                        android:textColor="@color/md_brown_400"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -120,17 +171,14 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <com.yarolegovich.discretescrollview.DiscreteScrollView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:visibility="visible"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:listitem="@layout/livematch_item" />
 
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="shimmerFrameLayout,recyclerView,NodataView" />
+            
 
             <TextView
                 android:id="@+id/textView2"
@@ -143,47 +191,64 @@
                 android:textColor="@color/md_red_400"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_goneMarginTop="80dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/barrier" />
 
 
             <ImageView
                 android:id="@+id/filerIv"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/filter_ic"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                app:layout_constraintTop_toTopOf="@+id/textView2"
                 app:layout_goneMarginTop="80dp" />
 
 
-            <com.faltenreich.skeletonlayout.SkeletonLayout
-                android:id="@+id/skeletonLayout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUpcoming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="16dp"
-                app:showShimmer="true"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
+                android:layout_marginTop="32dp"
+                android:fastScrollEnabled="true"
+                android:nestedScrollingEnabled="false"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:visibility="gone"
+                android:splitMotionEvents="false"
+                android:verticalScrollbarPosition="right"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:listitem="@layout/upcoming_match_item" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvUpcoming"
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerFrameLayoutUpcoming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:layout_editor_absoluteX="16dp">
+
+                <!-- Adding 15 rows of placeholders -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fastScrollEnabled="true"
-                    android:nestedScrollingEnabled="false"
-                    android:scrollbarStyle="insideInset"
-                    android:scrollbars="vertical"
-                    android:splitMotionEvents="false"
-                    android:verticalScrollbarPosition="right"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/upcoming_match_item" />
+                    android:orientation="vertical">
 
-            </com.faltenreich.skeletonlayout.SkeletonLayout>
+                    <include layout="@layout/skeleton_upcoming_match_item" />
+
+                    <include layout="@layout/skeleton_upcoming_match_item" />
+
+                    <include layout="@layout/skeleton_upcoming_match_item" />
+
+                    <include layout="@layout/skeleton_upcoming_match_item" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 

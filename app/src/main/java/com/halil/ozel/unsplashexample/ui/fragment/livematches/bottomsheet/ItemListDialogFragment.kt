@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.recyclerview.widget.LinearLayoutManager
+import cc.taylorzhang.singleclick.onSingleClick
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
 import com.halil.ozel.unsplashexample.databinding.FragmentItemListDialogListDialogBinding
 import com.halil.ozel.unsplashexample.ui.adapter.FilterLeagueAdapter
@@ -49,6 +50,10 @@ class ItemListDialogFragment  : SuperBottomSheetFragment(), DefaultLifecycleObse
             else{
 
             }
+        }
+
+        binding.closeIv.onSingleClick(){
+            this.dismiss()
         }
 
 

@@ -1,9 +1,10 @@
 package com.halil.ozel.unsplashexample.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.*
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -13,10 +14,6 @@ import com.halil.ozel.unsplashexample.R
 import com.halil.ozel.unsplashexample.databinding.LivematchItemBinding
 import com.halil.ozel.unsplashexample.model.livematches.Event_
 import com.halil.ozel.unsplashexample.model.livematches.Stream_
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController
 
 
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
@@ -50,8 +47,11 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val currImage = differ.currentList[position]
+        val context = holder.itemView.context
+
 
         holder.binding.apply {
 
@@ -74,9 +74,45 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
                     //transformations(CircleCropTransformation())
                 }
 
+                teamAscore.text = currImage.match.teams[0].result?.gameWins.toString()
+                teamBscore.text = currImage.match.teams[1].result?.gameWins.toString()
+
+                if(currImage.match.teams[0].result?.outcome.equals("win")){
+                    teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    teamAWin.visibility = View.VISIBLE
+                }
+                else if(currImage.match.teams[0].result?.outcome.equals("loss")){
+                    teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    teamAWin.visibility = View.VISIBLE
+
+                }
+
+                if(currImage.match.teams[1].result?.outcome.equals("win")){
+                    teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    teamBWin.visibility = View.VISIBLE
+
+                }
+                else if(currImage.match.teams[1].result?.outcome.equals("loss")){
+                    teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    teamBWin.visibility = View.VISIBLE
+                }
+
             }
             else{
-                consDetails.visibility = View.GONE
+                teamAname.text = "Not Available"
+                teamBname.text = "Not Available"
+
+                teamAiv.load(currImage.league.image){
+                    crossfade(true)
+                    placeholder(R.drawable.valorant_masters_lightmode)
+                    // transformations(CircleCropTransformation())
+
+                }
+                teamABiv.load(currImage.league.image){
+                    crossfade(true)
+                    placeholder(R.drawable.valorant_masters_lightmode)
+                    //transformations(CircleCropTransformation())
+                }
             }
 
 
@@ -88,24 +124,6 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
                     println("youtube")
 
                     parameter = item.parameter
-
-                    val youTubePlayerView: YouTubePlayerView = itemYoutubeplayer
-                    getlifecycle()?.addObserver(youTubePlayerView)
-
-                    youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                        override fun onReady(youTubePlayer: YouTubePlayer) {
-                            val defaultPlayerUiController =
-                                DefaultPlayerUiController(youTubePlayerView, youTubePlayer)
-                            youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.rootView)
-
-                            youTubePlayer.cueVideo(parameter, 0f)
-
-
-
-                        }
-
-
-                    })
 
 
                 }else if(item.provider.equals("twitch")){
