@@ -317,4 +317,9 @@
     <color name="yellow">#FBC02D</color>
     <color name="ccscsc">#0D85BC</color>
 
+    <color name="darknewbg">#000000</color>
+    <color name="darknewbgsec">#1A2028</color>
+
+    #
+
 </resources>

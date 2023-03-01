@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/valo_bg_color"
-    android:padding="@dimen/activity_padding"
+    android:background="@color/darknewbg"
     tools:context=".ui.main.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,9 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/black"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
+            android:background="@color/darknewbg"
+            app:itemIconTint="@drawable/navigation_view_colored"
+            app:itemTextColor="@drawable/navigation_view_colored"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

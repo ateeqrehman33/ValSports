@@ -12,8 +12,9 @@
         android:id="@+id/bracket_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:bracketBackgroundColor="#1c222e"
-        app:bracketColor="#262e40"
+        app:bracketBackgroundColor="@color/darknewbg"
+        app:bracketColor="@color/darknewbgsec"
+        tools:visibility="gone"
         app:bracketTextColor="#fff" />
 
 </FrameLayout>

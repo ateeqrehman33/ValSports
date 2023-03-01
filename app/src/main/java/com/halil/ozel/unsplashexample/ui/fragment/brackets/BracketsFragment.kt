@@ -10,14 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.halil.ozel.unsplashexample.R
-import com.halil.ozel.unsplashexample.databinding.CustomBracketViewBinding
 import com.halil.ozel.unsplashexample.databinding.FragmentBracketsBinding
 import com.halil.ozel.unsplashexample.model.brackets.Standing_
 import com.ventura.bracketslib.model.ColomnData
 import com.ventura.bracketslib.model.CompetitorData
 import com.ventura.bracketslib.model.MatchData
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.custom_bracket_view.view.*
 
 
 @AndroidEntryPoint
@@ -60,11 +58,8 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
     }
 
     private fun updateBracket(standings: List<Standing_>) {
-        //val player10 = CompetitorData("Player 10", "2")
-
 
         val columnDataList: ArrayList<ColomnData> = arrayListOf()
-
 
         println("columninit size"+standings[0].stages[0].sections[0].columns.size)
 

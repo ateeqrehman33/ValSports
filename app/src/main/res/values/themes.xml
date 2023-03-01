@@ -10,8 +10,21 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/darknewbgsec</item>
+
         <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/teal_200</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/md_red_300</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#6DFFFFFF</item>
     </style>
 
 

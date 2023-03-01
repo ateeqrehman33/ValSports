@@ -12,7 +12,9 @@ object Constants {
     const val GET_EVENT_LIST = "/persisted/val/getEventList"
     const val GET_SCHEDULE = "/persisted/val/getSchedule"
     const val GET_BRACKETS = "/persisted/val/getStandings"
+    const val GET_LEAGUES = "/persisted/val/getLeaguesForStandings"
 
 
     const val BASE_URL = "https://esports-api.service.valorantesports.com"
+    const val League_ID = "League_ID"
 }

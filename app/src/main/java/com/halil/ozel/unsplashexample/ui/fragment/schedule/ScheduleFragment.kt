@@ -2,17 +2,14 @@ package com.halil.ozel.unsplashexample.ui.fragment.schedule
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.halil.ozel.unsplashexample.databinding.FragmentScheduleBinding
-import com.halil.ozel.unsplashexample.ui.adapter.ImageAdapter
 import com.halil.ozel.unsplashexample.ui.adapter.ScheduleMatchesAdapter
-import com.halil.ozel.unsplashexample.ui.adapter.UpcomingMatchesAdapter
-import com.halil.ozel.unsplashexample.ui.fragment.livematches.LiveViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,6 +37,7 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
 
     private fun setupData() {
 
+
         scheduledadapter = ScheduleMatchesAdapter()
         binding.scheduleRevyclerview.apply {
             adapter = scheduledadapter
@@ -47,6 +45,8 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
             isNestedScrollingEnabled = false
 
         }
+
+
 
         viewModel.responseImages.observe(requireActivity()) { response ->
             if (response != null) {

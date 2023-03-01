@@ -1,32 +1,30 @@
 package com.halil.ozel.unsplashexample.ui.fragment.livematches
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.halil.ozel.unsplashexample.ui.adapter.ImageAdapter
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.recyclerview.widget.LinearLayoutManager
+import cc.taylorzhang.singleclick.onSingleClick
 import com.halil.ozel.unsplashexample.databinding.FragmentLiveBinding
+import com.halil.ozel.unsplashexample.ui.adapter.ImageAdapter
 import com.halil.ozel.unsplashexample.ui.adapter.UpcomingMatchesAdapter
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.halil.ozel.unsplashexample.ui.fragment.livematches.bottomsheet.ItemListDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_live.view.*
 
 
 @AndroidEntryPoint
-class LiveFragment : Fragment(), DefaultLifecycleObserver {
+class LiveFragment : Fragment(), DefaultLifecycleObserver  {
 
     private lateinit var binding: FragmentLiveBinding
     private lateinit var imageAdapter: ImageAdapter
     private lateinit var upcomingadapter : UpcomingMatchesAdapter
     private val viewModel: LiveViewModel by viewModels()
+
 
 
     override fun onCreateView(
@@ -44,20 +42,21 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver {
 
 
     private fun setupData() {
+
+
+
         imageAdapter = ImageAdapter()
         binding.recyclerView.apply {
             adapter = imageAdapter
             setHasFixedSize(true)
+
         }
 
         viewModel.responseImages.observe(requireActivity()) { response ->
-            if (response != null && response.size>0) {
-
-                println("not null")
+            if (response != null && response.isNotEmpty()) {
                 imageAdapter.submitList(response)
             }
             else{
-                println("its null")
                 binding.recyclerView.visibility = View.GONE
                 binding.NodataView.visibility = View.VISIBLE
 
@@ -72,12 +71,24 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver {
 
         }
 
+
         viewModel.responseUpcoming.observe(requireActivity()) { response ->
             if (response != null) {
                 upcomingadapter.submitList(response)
             }
         }
 
+        binding.filerIv.onSingleClick() {
+
+                val sheet = ItemListDialogFragment()
+                sheet.show(childFragmentManager, "")
+
+            childFragmentManager.executePendingTransactions()
+            sheet.dialog?.setOnDismissListener(DialogInterface.OnDismissListener {
+                println("Dissmissed")
+                viewModel.getUpcomingMatches()
+            })
+        }
     }
 
 
@@ -90,5 +101,6 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver {
         activity?.lifecycle?.removeObserver(this)
         super.onDetach()
     }
+
 
 }

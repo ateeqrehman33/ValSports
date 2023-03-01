@@ -100,7 +100,6 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
                             youTubePlayer.cueVideo(parameter, 0f)
 
-                            itemVeilLayout.unVeil()
 
 
                         }

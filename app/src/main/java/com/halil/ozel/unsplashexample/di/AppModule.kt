@@ -1,5 +1,7 @@
 package com.halil.ozel.unsplashexample.di
 
+import android.app.Application
+import android.content.Context
 import com.halil.ozel.unsplashexample.api.ImageService
 import com.halil.ozel.unsplashexample.utils.Constants
 import dagger.Module
@@ -40,6 +42,11 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ImageService::class.java)
+
+
+    @Singleton
+    @Provides
+    fun provideContext(application: Application): Context = application.applicationContext
 
 
 }

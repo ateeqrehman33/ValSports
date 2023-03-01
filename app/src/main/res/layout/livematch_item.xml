@@ -4,7 +4,7 @@
     android:layout_height="230dp"
     android:background="@drawable/bg_upcoming_matches"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/background800"
+    app:cardBackgroundColor="@color/darknewbgsec"
     app:cardCornerRadius="12dp"
     android:layout_marginHorizontal="12dp"
     android:layout_marginTop="8dp"
@@ -21,20 +21,7 @@
         android:orientation="vertical"
         tools:ignore="UnusedAttribute">
 
-        <com.skydoves.androidveil.VeilLayout
-            android:id="@+id/item_veilLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:veilLayout_baseAlpha="0.9"
-            app:veilLayout_baseColor="@color/colorVeil"
-            app:veilLayout_dropOff="0.5"
-            app:veilLayout_highlightAlpha="1.0"
-            app:veilLayout_radius="12dp"
-            app:veilLayout_shimmerEnable="true"
-            app:veilLayout_veiled="true">
+
 
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -63,39 +50,37 @@
 
 
 
-        </com.skydoves.androidveil.VeilLayout>
 
         <ProgressBar
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/progressTwitch"
-            app:layout_constraintBottom_toBottomOf="@+id/item_veilLayout"
-            app:layout_constraintEnd_toEndOf="@+id/item_veilLayout"
-            app:layout_constraintStart_toStartOf="@+id/item_veilLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:visibility="gone"
-            app:layout_constraintTop_toTopOf="@+id/item_veilLayout" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/consDetails"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/background800"
+            android:background="@drawable/bg_upcoming_matches"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_veilLayout">
+            app:layout_constraintTop_toBottomOf="@+id/item_youtubeplayer">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/valo_font"
+                android:fontFamily="@font/merriweathersans_bold"
                 android:text="Challengers SEA ID : WEEK 4"
                 android:textColor="@color/white"
                 android:textSize="12dp"
-                android:textStyle="normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +101,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/abeezee_regular"
+                android:fontFamily="@font/merriweathersans_regular"
                 android:gravity="start"
                 android:text="ARF TEAM"
                 android:textColor="@color/md_amber_50"
@@ -139,7 +124,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/abeezee_regular"
+                android:fontFamily="@font/merriweathersans_regular"
                 android:gravity="end"
                 android:text="BOOM Esports"
                 android:textColor="@color/md_amber_50"
