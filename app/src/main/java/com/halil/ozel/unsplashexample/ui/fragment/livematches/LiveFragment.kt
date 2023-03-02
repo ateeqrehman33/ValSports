@@ -14,6 +14,8 @@ import com.halil.ozel.unsplashexample.databinding.FragmentLiveBinding
 import com.halil.ozel.unsplashexample.ui.adapter.ImageAdapter
 import com.halil.ozel.unsplashexample.ui.adapter.UpcomingMatchesAdapter
 import com.halil.ozel.unsplashexample.ui.fragment.livematches.bottomsheet.ItemListDialogFragment
+import com.xcoder.animator.Animations
+import com.xcoder.animator.ScrollAnimator
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -72,6 +74,13 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver  {
             adapter = upcomingadapter
             setHasFixedSize(false)
             isNestedScrollingEnabled = false
+
+            ScrollAnimator.create()
+                .withAnimation(Animations.ANIMATION_SLIDE_FROM_LEFT)
+                .withInterpolator(Animations.INTERPOLATOR_FAST_OUT_SLOW)
+                .tillDuration(Animations.DURATION_FAST)
+                .playOnlyOnDownScroll(false)
+                .animate(this);
 
         }
 

@@ -2,12 +2,10 @@ package com.halil.ozel.unsplashexample.ui.adapter
 
 import DateUtils
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -80,15 +78,15 @@ class ScheduleMatchesAdapter : RecyclerView.Adapter<ScheduleMatchesAdapter.Image
             val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
 
 
-            println("passes : $daysPassed : $formatedDate")
 
             if(DateUtils.isSameDaynew(formatedDate,nowDate)){
                 dateTitle.text = "Today"
+
             }
             else if(DateUtils.isSameDaynew(formatedDate,DateUtils.addOneDay(nowDate))){
                 dateTitle.text = "Tomorrow"
             }
-            else if(daysPassed >= 2 && daysPassed < 5){
+            else if(daysPassed in 2..4){
                 dateTitle.text = ""+DateUtils.formatDate(formatedDate,"EEEE")
             }
             else{
