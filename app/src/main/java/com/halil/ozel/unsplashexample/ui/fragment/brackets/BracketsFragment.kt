@@ -1,17 +1,22 @@
 package com.halil.ozel.unsplashexample.ui.fragment.brackets
 
-import android.R.layout
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
-import com.halil.ozel.unsplashexample.R
 import com.halil.ozel.unsplashexample.databinding.FragmentBracketsBinding
 import com.halil.ozel.unsplashexample.model.brackets.Standing_
+import com.skydoves.powerspinner.IconSpinnerAdapter
+import com.skydoves.powerspinner.IconSpinnerItem
+import com.skydoves.powerspinner.OnSpinnerItemSelectedListener
 import com.ventura.bracketslib.model.ColomnData
 import com.ventura.bracketslib.model.CompetitorData
 import com.ventura.bracketslib.model.MatchData
@@ -24,6 +29,8 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
     private lateinit var binding: FragmentBracketsBinding
     private val viewModel: BracketsViewModel by viewModels()
+
+
 
 
     override fun onCreateView(
@@ -47,6 +54,70 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
     }
 
     private fun setupData() {
+
+
+
+
+
+        val leagueadapter = IconSpinnerAdapter(binding.dropdownLeague)
+        binding.dropdownLeague.setOnSpinnerItemSelectedListener(
+            OnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
+                Toast.makeText(requireActivity(), item.text, Toast.LENGTH_SHORT).show()
+                println("qwertyuiop : "+item.text)
+
+            }
+        )
+        val tourdapter = IconSpinnerAdapter(binding.dropdownTournament)
+
+
+        viewModel.responseLeague.observe(requireActivity()) { leagues ->
+            if (leagues != null) {
+                var listofleagues : ArrayList<IconSpinnerItem> = arrayListOf()
+
+                for (league in leagues){
+                    listofleagues.add(
+                        IconSpinnerItem(
+                            text = league.name
+                         )
+                    )
+                }
+                leagueadapter.setItems(listofleagues)
+
+                binding.dropdownLeague.getSpinnerRecyclerView().adapter = leagueadapter
+                binding.dropdownLeague.apply {
+                    setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
+                        println("qwertyuiop : "+item.text)
+                        Toast.makeText(context, item.text, Toast.LENGTH_SHORT).show()
+
+
+                        var listoftour : ArrayList<IconSpinnerItem> = arrayListOf()
+
+                        for (tour in leagues[0].tournaments){
+                            listoftour.add(
+                                IconSpinnerItem(
+                                    text = tour.id.toString())
+                            )
+                        }
+                        tourdapter.setItems(listoftour)
+                        binding.dropdownTournament.getSpinnerRecyclerView().adapter = tourdapter
+
+                        binding.dropdownTournament.setOnSpinnerItemSelectedListener(
+                            OnSpinnerItemSelectedListener<IconSpinnerItem>{_,_,pos,item->
+                                Toast.makeText(context, item.text, Toast.LENGTH_SHORT).show()
+
+                                //update bracket
+                                viewModel.updateBracketsByTourId(item.text.toString())
+
+                            }
+                        )
+                    }
+                }
+
+
+
+
+            }
+        }
 
         viewModel.responseImages.observe(requireActivity()) { standings ->
             if (standings != null) {
@@ -88,8 +159,6 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
 
         binding.bracketView.setBracketsData(columnDataList)
-       // addDymmyData()
-
 
     }
 
@@ -147,6 +216,8 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 //        )
 //    }
 
-
+    private fun contextDrawable(@DrawableRes resource: Int): Drawable? {
+        return ContextCompat.getDrawable(requireContext(), resource)
+    }
 
 }

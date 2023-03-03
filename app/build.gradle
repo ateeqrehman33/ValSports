@@ -100,8 +100,7 @@ dependencies {
     implementation 'cc.taylorzhang:single-click:1.1.0'
 
     implementation 'com.github.ErrorxCode:Animify:v1.0'
-
-
+    implementation "com.github.skydoves:powerspinner:1.2.5"
 
 
 

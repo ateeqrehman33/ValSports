@@ -13,7 +13,7 @@ class ImageRepository @Inject constructor(private val api: ImageService) {
 
     suspend fun getSchedule() = api.getSchedule("en-GB","val","109551178413356399,106109559530232966,107019646737643925,107566795186957938")
 
-    suspend fun getBrackets() = api.getBrackets("en-GB","val","109710937834457925")
+    suspend fun getBrackets(selectedtourId: String) = api.getBrackets("en-GB","val",selectedtourId)
 
     suspend fun getLeagues() = api.getLeagues("en-GB","val")
 

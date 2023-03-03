@@ -4,10 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/darknewbg"
     android:id="@+id/rootCont"
     android:layout_height="match_parent">
-
-
 
 
 
@@ -18,25 +17,116 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:padding="16dp"
             android:background="@color/darknewbgsec"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
+            <ImageView
+                android:id="@+id/filerIv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/filter_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/valo_font"
-                android:text="Brackets"
+                android:text="Standings"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayosut2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darknewbgsec"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/darknewbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darknewbgsec"
+                android:gravity="start"
+                android:hint="League : "
+                android:padding="10dp"
+                android:textColor="@color/white_93"
+                android:textColorHint="@color/white_70"
+                android:textSize="14.5sp"
+                app:spinner_popup_height="500dp"
+                android:fontFamily="@font/merriweathersans_extrabold"
+                android:id="@+id/dropdown_league"
+                app:spinner_arrow_gravity="end"
+                app:spinner_arrow_padding="8dp"
+                app:spinner_divider_color="@color/darknewbg"
+                app:spinner_divider_show="true"
+                app:spinner_divider_size="0.4dp"
+                app:spinner_item_height="46dp"
+                app:spinner_popup_animation="dropdown"
+                app:spinner_popup_background="@color/darknewbgsec"
+                app:spinner_popup_elevation="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/view1"/>
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/darknewbg"
+                            app:layout_constraintTop_toBottomOf="@+id/dropdown_league" />
+
+
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/darknewbgsec"
+                android:gravity="start"
+                android:hint="Tournament : "
+                android:padding="10dp"
+                android:textColor="@color/white_93"
+                android:textColorHint="@color/white_70"
+                android:fontFamily="@font/merriweathersans_extrabold"
+                android:textSize="14.5sp"
+                android:id="@+id/dropdown_tournament"
+                app:spinner_arrow_gravity="end"
+                app:spinner_popup_height="500dp"
+                app:spinner_arrow_padding="8dp"
+                app:spinner_divider_color="@color/darknewbg"
+                app:spinner_divider_show="true"
+                app:spinner_divider_size="0.4dp"
+                app:spinner_item_height="46dp"
+                app:spinner_popup_animation="dropdown"
+                app:spinner_popup_background="@color/darknewbgsec"
+                app:spinner_popup_elevation="14dp"
+                app:layout_constraintTop_toBottomOf="@+id/view2"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,8 +141,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayosut2" />
+
+<!--        <com.ventura.bracketslib.BracketsView-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
