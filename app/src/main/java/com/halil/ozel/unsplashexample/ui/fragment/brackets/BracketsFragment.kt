@@ -1,22 +1,22 @@
 package com.halil.ozel.unsplashexample.ui.fragment.brackets
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.halil.ozel.unsplashexample.R
 import com.halil.ozel.unsplashexample.databinding.FragmentBracketsBinding
-import com.halil.ozel.unsplashexample.model.brackets.Standing_
+import com.halil.ozel.unsplashexample.model.brackets.Column_
+import com.halil.ozel.unsplashexample.model.brackets.Stage_
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
-import com.skydoves.powerspinner.OnSpinnerItemSelectedListener
 import com.ventura.bracketslib.model.ColomnData
 import com.ventura.bracketslib.model.CompetitorData
 import com.ventura.bracketslib.model.MatchData
@@ -60,13 +60,7 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
 
         val leagueadapter = IconSpinnerAdapter(binding.dropdownLeague)
-        binding.dropdownLeague.setOnSpinnerItemSelectedListener(
-            OnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
-                Toast.makeText(requireActivity(), item.text, Toast.LENGTH_SHORT).show()
-                println("qwertyuiop : "+item.text)
 
-            }
-        )
         val tourdapter = IconSpinnerAdapter(binding.dropdownTournament)
 
 
@@ -77,73 +71,101 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
                 for (league in leagues){
                     listofleagues.add(
                         IconSpinnerItem(
-                            text = league.name
+                            text = league.name,
+                            icon = null
                          )
                     )
                 }
                 leagueadapter.setItems(listofleagues)
 
                 binding.dropdownLeague.getSpinnerRecyclerView().adapter = leagueadapter
-                binding.dropdownLeague.apply {
-                    setOnSpinnerItemSelectedListener<IconSpinnerItem> { _, _, _, item ->
-                        println("qwertyuiop : "+item.text)
-                        Toast.makeText(context, item.text, Toast.LENGTH_SHORT).show()
+                binding.dropdownLeague.lifecycleOwner = this@BracketsFragment
+                println("qwertyuiop : before")
 
+                binding.dropdownLeague.setOnSpinnerDismissListener {
+                    println("qwertyuiop : dismissded")
+                    println("qwertyuiop : "+binding.dropdownLeague.selectedIndex)
 
-                        var listoftour : ArrayList<IconSpinnerItem> = arrayListOf()
+                    var listoftour : ArrayList<IconSpinnerItem> = arrayListOf()
 
-                        for (tour in leagues[0].tournaments){
-                            listoftour.add(
-                                IconSpinnerItem(
-                                    text = tour.id.toString())
-                            )
-                        }
-                        tourdapter.setItems(listoftour)
-                        binding.dropdownTournament.getSpinnerRecyclerView().adapter = tourdapter
-
-                        binding.dropdownTournament.setOnSpinnerItemSelectedListener(
-                            OnSpinnerItemSelectedListener<IconSpinnerItem>{_,_,pos,item->
-                                Toast.makeText(context, item.text, Toast.LENGTH_SHORT).show()
-
-                                //update bracket
-                                viewModel.updateBracketsByTourId(item.text.toString())
-
-                            }
+                    for (tour in leagues[binding.dropdownLeague.selectedIndex].tournaments){
+                        listoftour.add(
+                            IconSpinnerItem(
+                                text = tour.id.toString())
                         )
                     }
+                    tourdapter.setItems(listoftour)
+                    binding.dropdownTournament.getSpinnerRecyclerView().adapter = tourdapter
+
+                    binding.dropdownTournament.setOnSpinnerDismissListener {
+                        //update bracket
+                        binding.chipGroup.removeAllViews()
+                        viewModel.updateBracketsByTourId(listoftour[binding.dropdownTournament.selectedIndex].text.toString())
+
+                    }
+
                 }
 
 
-
-
             }
+
         }
 
         viewModel.responseImages.observe(requireActivity()) { standings ->
             if (standings != null) {
 
-                updateBracket(standings)
+                val chipGroup = binding.chipGroup as ChipGroup
+                var stageList : ArrayList<Stage_> = arrayListOf()
+
+                for (stage in standings[0].stages){
+                    stageList.add(stage)
+                    val chip = layoutInflater.inflate(R.layout.chip_layout, chipGroup, false) as Chip
+                    chip.id = ViewCompat.generateViewId()
+                    chip.setText(stage.name)
+                    chip.isCheckable = true
+                    chipGroup.addView(chip)
+                }
+
+
+                chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                    // The same checked chip
+                    if (checkedId == -1) {
+                        return@setOnCheckedChangeListener
+                    } else {
+                        println("chip selected : "+checkedId)
+                        updateBracket(standings[0].stages[checkedId+1].sections[0].columns)
+                    }
+                }
+
+                chipGroup.setOnCheckedChangeListener { group, checkedId ->
+                    if (checkedId == 0) {
+                        println("chip selected : "+checkedId)
+                        updateBracket(standings[0].stages[checkedId].sections[0].columns)
+                    }
+                }
+
+                updateBracket(standings[0].stages[0].sections[0].columns)
 
             }
         }
     }
 
-    private fun updateBracket(standings: List<Standing_>) {
+    private fun updateBracket(columns: List<Column_>) {
 
         val columnDataList: ArrayList<ColomnData> = arrayListOf()
 
-        println("columninit size"+standings[0].stages[0].sections[0].columns.size)
+        println("columninit size"+columns.size)
 
-        for(i in standings[0].stages[0].sections[0].columns.indices){
+        for(i in columns.indices){
 
             val matchdatalist: ArrayList<MatchData> = arrayListOf()
 
 
-            for (j in standings[0].stages[0].sections[0].columns[i].cells[0].matches.indices){
-                val teamDataA = CompetitorData(standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[0].name,standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[0].result?.gameWins.toString(),standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[0].image)
-                val teamDataB = CompetitorData(standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[1].name,standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[1].result?.gameWins.toString(),standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[1].image)
+            for (j in columns[i].cells[0].matches.indices){
+                val teamDataA = CompetitorData(columns[i].cells[0].matches[j].teams[0].name,columns[i].cells[0].matches[j].teams[0].result?.gameWins.toString(),columns[i].cells[0].matches[j].teams[0].image)
+                val teamDataB = CompetitorData(columns[i].cells[0].matches[j].teams[1].name,columns[i].cells[0].matches[j].teams[1].result?.gameWins.toString(),columns[i].cells[0].matches[j].teams[1].image)
                 val matchData = MatchData(teamDataA, teamDataB)
-                println("adding match data "+standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[0].name+" , "+standings[0].stages[0].sections[0].columns[i].cells[0].matches[j].teams[1].name)
+                println("adding match data "+columns[i].cells[0].matches[j].teams[0].name+" , "+columns[i].cells[0].matches[j].teams[1].name)
                 matchdatalist.add(matchData)
 
             }
@@ -215,9 +237,5 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 //            )
 //        )
 //    }
-
-    private fun contextDrawable(@DrawableRes resource: Int): Drawable? {
-        return ContextCompat.getDrawable(requireContext(), resource)
-    }
 
 }

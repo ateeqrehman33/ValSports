@@ -103,22 +103,32 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
 
         for (i in response.indices){
 
-            val formatedDate : Date = DateUtils.formatDate(response[i].startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
-            val nowDate : Date = DateUtils.now()
-            val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
+            try {
 
-            if(DateUtils.isSameDaynew(formatedDate,nowDate)){
-                position = i //today
-                break
+
+                val formatedDate : Date = DateUtils.formatDate(response[i].startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
+                val nowDate : Date = DateUtils.now()
+                val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
+
+                if(DateUtils.isSameDaynew(formatedDate,nowDate)){
+                    position = i //today
+                    break
+                }
+                else if(DateUtils.isSameDaynew(formatedDate,DateUtils.addOneDay(nowDate))){
+                    position = i //tomorrow
+                    break
+                }
+                else if(daysPassed in 2..4){
+                    position = i // 2-4days
+                    break
+                }
+
+            }catch (e : Exception){
+
+                position  = 0
+
             }
-            else if(DateUtils.isSameDaynew(formatedDate,DateUtils.addOneDay(nowDate))){
-                position = i //tomorrow
-                break
-            }
-            else if(daysPassed in 2..4){
-                position = i // 2-4days
-                break
-            }
+
 
         }
         return position

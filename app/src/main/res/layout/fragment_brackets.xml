@@ -98,25 +98,27 @@
                         <View
                             android:id="@+id/view2"
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="2dp"
                             android:background="@color/darknewbg"
                             app:layout_constraintTop_toBottomOf="@+id/dropdown_league" />
 
 
             <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/dropdown_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/darknewbgsec"
+                android:fontFamily="@font/merriweathersans_extrabold"
                 android:gravity="start"
                 android:hint="Tournament : "
                 android:padding="10dp"
                 android:textColor="@color/white_93"
                 android:textColorHint="@color/white_70"
-                android:fontFamily="@font/merriweathersans_extrabold"
                 android:textSize="14.5sp"
-                android:id="@+id/dropdown_tournament"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2"
                 app:spinner_arrow_gravity="end"
-                app:spinner_popup_height="500dp"
                 app:spinner_arrow_padding="8dp"
                 app:spinner_divider_color="@color/darknewbg"
                 app:spinner_divider_show="true"
@@ -125,10 +127,24 @@
                 app:spinner_popup_animation="dropdown"
                 app:spinner_popup_background="@color/darknewbgsec"
                 app:spinner_popup_elevation="14dp"
-                app:layout_constraintTop_toBottomOf="@+id/view2"/>
+                app:spinner_popup_height="200dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:chipSpacing="10dp"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayosut2">
+
+        </com.google.android.material.chip.ChipGroup>
 
 
         <com.ventura.bracketslib.BracketsView
@@ -141,7 +157,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayosut2" />
+            app:layout_constraintTop_toBottomOf="@+id/chip_group" />
 
 <!--        <com.ventura.bracketslib.BracketsView-->
 
