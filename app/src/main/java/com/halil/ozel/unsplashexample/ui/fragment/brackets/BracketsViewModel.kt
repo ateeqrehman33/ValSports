@@ -42,6 +42,10 @@ class BracketsViewModel @Inject constructor(private val repository: ImageReposit
                         selectedtourId = league.tournaments[0].id
                         break
                     }
+                    else if(league.displayPriority.status.equals("selected")){
+                        selectedtourId = league.tournaments[0].id
+                        break
+                    }
                 }
 
                 getAllImages(selectedtourId)

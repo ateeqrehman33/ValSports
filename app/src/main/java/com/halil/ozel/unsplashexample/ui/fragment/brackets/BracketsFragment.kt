@@ -86,26 +86,32 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
                     println("qwertyuiop : dismissded")
                     println("qwertyuiop : "+binding.dropdownLeague.selectedIndex)
 
-                    var listoftour : ArrayList<IconSpinnerItem> = arrayListOf()
+                    if(binding.dropdownLeague.selectedIndex>=0){
 
-                    for (tour in leagues[binding.dropdownLeague.selectedIndex].tournaments){
-                        listoftour.add(
-                            IconSpinnerItem(
-                                text = tour.id.toString())
-                        )
-                    }
-                    tourdapter.setItems(listoftour)
-                    binding.dropdownTournament.getSpinnerRecyclerView().adapter = tourdapter
+                        var listoftour : ArrayList<IconSpinnerItem> = arrayListOf()
 
-                    binding.dropdownTournament.setOnSpinnerDismissListener {
-                        //update bracket
-                        binding.chipGroup.removeAllViews()
-                        viewModel.updateBracketsByTourId(listoftour[binding.dropdownTournament.selectedIndex].text.toString())
+                        for (tour in leagues[binding.dropdownLeague.selectedIndex].tournaments){
+                            listoftour.add(
+                                IconSpinnerItem(
+                                    text = tour.id.toString())
+                            )
+                        }
+                        tourdapter.setItems(listoftour)
+                        binding.dropdownTournament.getSpinnerRecyclerView().adapter = tourdapter
+
+                        binding.dropdownTournament.setOnSpinnerDismissListener {
+                            //update bracket
+
+                            if(binding.dropdownLeague.selectedIndex>=0){
+                                binding.chipGroup.removeAllViews()
+                                viewModel.updateBracketsByTourId(listoftour[binding.dropdownTournament.selectedIndex].text.toString())
+                            }
+
+                        }
 
                     }
 
                 }
-
 
             }
 
