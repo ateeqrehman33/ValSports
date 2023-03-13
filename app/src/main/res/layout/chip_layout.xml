@@ -3,4 +3,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/chip_smart_contract"
     android:layout_width="wrap_content"
+    style="@style/Widget.MaterialComponents.Chip.Choice"
     android:layout_height="wrap_content" />

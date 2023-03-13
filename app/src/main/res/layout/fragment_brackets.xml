@@ -146,6 +146,20 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:chipSpacing="10dp"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group">
+
+        </com.google.android.material.chip.ChipGroup>
+
 
         <com.ventura.bracketslib.BracketsView
             android:id="@+id/bracket_view"
@@ -157,7 +171,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+            app:layout_constraintTop_toBottomOf="@+id/chip_group2" />
 
 <!--        <com.ventura.bracketslib.BracketsView-->
 

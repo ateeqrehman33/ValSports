@@ -102,6 +102,8 @@ dependencies {
     implementation 'com.github.ErrorxCode:Animify:v1.0'
     implementation "com.github.skydoves:powerspinner:1.2.5"
     implementation "com.google.android.material:material:1.9.0-alpha02"
+    implementation "com.github.vedraj360:ChipRecyclerView:Release-1.0.5"
+
 
 
 

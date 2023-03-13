@@ -5,6 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,8 @@ public class BracketsColomnFragment extends Fragment {
     private int previousBracketSize;
     private ArrayList<MatchData> list;
     private RecyclerView bracketsRV;
+    private TextView columnnameTv;
+    private String columnName;
 
     private BracketsCellAdapter adapter;
     private int bracketColor;
@@ -58,6 +61,7 @@ public class BracketsColomnFragment extends Fragment {
     private void initViews() {
 
         bracketsRV = (RecyclerView) getView().findViewById(R.id.rv_score_board);
+        columnnameTv = (TextView) getView().findViewById(R.id.column_name);
     }
 
     public ArrayList<MatchData> getColomnList() {
@@ -71,6 +75,7 @@ public class BracketsColomnFragment extends Fragment {
             sectionNumber = getArguments().getInt("section_number");
             previousBracketSize = getArguments().getInt("previous_section_size");
             list.addAll(colomnData.getMatches());
+            columnName = colomnData.getColumnName();
             setInitialHeightForList();
         }
     }
@@ -129,6 +134,7 @@ public class BracketsColomnFragment extends Fragment {
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             bracketsRV.setLayoutManager(layoutManager);
             bracketsRV.setItemAnimator(new DefaultItemAnimator());
+            columnnameTv.setText(columnName);
         }
     }
 

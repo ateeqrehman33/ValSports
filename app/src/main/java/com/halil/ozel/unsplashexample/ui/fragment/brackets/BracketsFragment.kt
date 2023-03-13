@@ -2,6 +2,7 @@ package com.halil.ozel.unsplashexample.ui.fragment.brackets
 
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.halil.ozel.unsplashexample.R
 import com.halil.ozel.unsplashexample.databinding.FragmentBracketsBinding
 import com.halil.ozel.unsplashexample.model.brackets.Column_
+import com.halil.ozel.unsplashexample.model.brackets.Section_
 import com.halil.ozel.unsplashexample.model.brackets.Stage_
+import com.halil.ozel.unsplashexample.model.brackets.Standing_
+import com.halil.ozel.unsplashexample.model.leagues.League_
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.ventura.bracketslib.model.ColomnData
@@ -26,12 +29,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
-
     private lateinit var binding: FragmentBracketsBinding
     private val viewModel: BracketsViewModel by viewModels()
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,131 +40,242 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
         val baseInflater = LayoutInflater.from(requireActivity()) // NOT context
         binding = FragmentBracketsBinding.inflate(baseInflater)
 
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         setupData()
-
     }
 
     private fun setupData() {
 
-
-
-
-
-        val leagueadapter = IconSpinnerAdapter(binding.dropdownLeague)
-
-        val tourdapter = IconSpinnerAdapter(binding.dropdownTournament)
-
-
         viewModel.responseLeague.observe(requireActivity()) { leagues ->
             if (leagues != null) {
-                var listofleagues : ArrayList<IconSpinnerItem> = arrayListOf()
-
-                for (league in leagues){
-                    listofleagues.add(
-                        IconSpinnerItem(
-                            text = league.name,
-                            icon = null
-                         )
-                    )
-                }
-                leagueadapter.setItems(listofleagues)
-
-                binding.dropdownLeague.getSpinnerRecyclerView().adapter = leagueadapter
-                binding.dropdownLeague.lifecycleOwner = this@BracketsFragment
-                println("qwertyuiop : before")
-
-                binding.dropdownLeague.setOnSpinnerDismissListener {
-                    println("qwertyuiop : dismissded")
-                    println("qwertyuiop : "+binding.dropdownLeague.selectedIndex)
-
-                    if(binding.dropdownLeague.selectedIndex>=0){
-
-                        var listoftour : ArrayList<IconSpinnerItem> = arrayListOf()
-
-                        for (tour in leagues[binding.dropdownLeague.selectedIndex].tournaments){
-                            listoftour.add(
-                                IconSpinnerItem(
-                                    text = tour.id.toString())
-                            )
-                        }
-                        tourdapter.setItems(listoftour)
-                        binding.dropdownTournament.getSpinnerRecyclerView().adapter = tourdapter
-
-                        binding.dropdownTournament.setOnSpinnerDismissListener {
-                            //update bracket
-
-                            if(binding.dropdownLeague.selectedIndex>=0){
-                                binding.chipGroup.removeAllViews()
-                                viewModel.updateBracketsByTourId(listoftour[binding.dropdownTournament.selectedIndex].text.toString())
-                            }
-
-                        }
-
-                    }
-
-                }
-
+                setupLeagueData(leagues)
             }
-
         }
 
         viewModel.responseImages.observe(requireActivity()) { standings ->
             if (standings != null) {
-
-                val chipGroup = binding.chipGroup as ChipGroup
-                var stageList : ArrayList<Stage_> = arrayListOf()
-
-                for (stage in standings[0].stages){
-                    stageList.add(stage)
-                    val chip = layoutInflater.inflate(R.layout.chip_layout, chipGroup, false) as Chip
-                    chip.id = ViewCompat.generateViewId()
-                    chip.setText(stage.name)
-                    chip.isCheckable = true
-                    chipGroup.addView(chip)
-                }
-
-
-                chipGroup.setOnCheckedChangeListener { group, checkedId ->
-                    // The same checked chip
-                    if (checkedId == -1) {
-                        return@setOnCheckedChangeListener
-                    } else {
-                        println("chip selected : "+checkedId)
-                        updateBracket(standings[0].stages[checkedId+1].sections[0].columns)
-                    }
-                }
-
-                chipGroup.setOnCheckedChangeListener { group, checkedId ->
-                    if (checkedId == 0) {
-                        println("chip selected : "+checkedId)
-                        updateBracket(standings[0].stages[checkedId].sections[0].columns)
-                    }
-                }
-
-                updateBracket(standings[0].stages[0].sections[0].columns)
+                //setupStandings(standings)
+                setupTournamentData(standings)
 
             }
         }
     }
+
+
+    private fun setupLeagueData(leagues: List<League_>) {
+
+        val leagueadapter = IconSpinnerAdapter(binding.dropdownLeague)
+
+        var listofleagues : ArrayList<IconSpinnerItem> = arrayListOf()
+        var selectedtourIdpos : Int = 0
+        var isexecuted=false;
+
+
+        for ((i,league) in leagues.withIndex()){
+
+            listofleagues.add(IconSpinnerItem(text = league.name, icon = null))
+
+            if(league.displayPriority.status.equals("force_selected") && !isexecuted){
+                isexecuted = true
+                selectedtourIdpos = i
+            }
+            else if(league.displayPriority.status.equals("selected") && !isexecuted){
+                isexecuted = true
+                selectedtourIdpos = i
+            }
+        }
+
+        binding.dropdownLeague.apply {
+            getSpinnerRecyclerView().adapter = leagueadapter
+            leagueadapter.setItems(listofleagues)
+            setIsFocusable(true)
+            //selectItemByIndex(selectedtourIdpos)
+            lifecycleOwner = this@BracketsFragment
+            setOnSpinnerDismissListener {
+                println("selected index  : "+binding.dropdownLeague.selectedIndex)
+                if(binding.dropdownLeague.selectedIndex>=0){
+
+                    var listoftourid : ArrayList<String> = arrayListOf()
+
+                    for (tour in leagues.get(binding.dropdownLeague.selectedIndex).tournaments){
+                        listoftourid.add(tour.id)
+                    }
+                    val s: String = TextUtils.join(",", listoftourid)
+
+                    binding.dropdownTournament.clearSelectedItem()
+                    binding.bracketView.visibility = View.GONE
+                    viewModel.updateBracketsByTourId(s)
+                    //setupTournamentData(leagues.get(binding.dropdownLeague.selectedIndex).tournaments)
+                }
+            }
+        }
+    }
+
+    private fun setupTournamentData(standings: List<Standing_>) {
+
+        var listoftour : ArrayList<IconSpinnerItem> = arrayListOf()
+        val tourdapter = IconSpinnerAdapter(binding.dropdownTournament)
+
+        for (tour in standings){
+            listoftour.add(
+                IconSpinnerItem(
+                    text = tour.name)
+            )
+        }
+
+        binding.dropdownTournament.apply {
+            getSpinnerRecyclerView().adapter = tourdapter
+            tourdapter.setItems(listoftour)
+            //selectItemByIndex(0)
+            setOnSpinnerDismissListener {
+                try {
+
+                    if(binding.dropdownLeague.selectedIndex>=0){
+                        if(standings.get(binding.dropdownTournament.selectedIndex).stages.isEmpty()){
+                            println("no stages data")
+                        }
+                        else{
+                            setupStages(standings.get(binding.dropdownTournament.selectedIndex).stages)
+                        }
+                    }
+
+                }catch (e : Exception){
+
+                }
+
+            }
+        }
+    }
+
+    private fun setupStages(stages: List<Stage_>) {
+
+        val chipGroup = binding.chipGroup
+        chipGroup.removeAllViews()
+
+        val stageList : ArrayList<Stage_> = arrayListOf()
+        var checkFirstItem : Boolean = true
+
+        for (stage in stages){
+            stageList.add(stage)
+            val chip = layoutInflater.inflate(R.layout.chip_layout, chipGroup, false) as Chip
+
+            chip.apply {
+                id = ViewCompat.generateViewId()
+                setText(stage.name)
+                isCheckable = true
+                if(checkFirstItem){
+                    chip.isChecked = true
+                    checkFirstItem = false
+                }
+            }
+            chipGroup.addView(chip)
+        }
+
+        binding.chipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
+            val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
+            //Toast.makeText(chipGroup.context, titleOrNull ?: "No Choice", Toast.LENGTH_LONG).show()
+
+            var selectedIndex = 0
+                for((i,stage) in stageList.withIndex()){
+                    if(stage.name.equals(titleOrNull)){
+                        selectedIndex = i
+                        break
+                    }
+                }
+            println("selected section id "+selectedIndex)
+            println("selected chip colmn size "+stages[selectedIndex].sections[0].columns.size)
+
+            if(stages[selectedIndex].sections[0].columns.isNotEmpty()){
+                binding.bracketView.visibility = View.VISIBLE
+                //updateBracket(stages[selectedIndex].sections[0].columns)
+                setupSections(stages[selectedIndex].sections)
+            }
+            else{
+                binding.bracketView.visibility = View.GONE
+            }
+        }
+
+        if(stages[0].sections[0].columns.isNotEmpty()){
+            binding.bracketView.visibility = View.VISIBLE
+            updateBracket(stages[0].sections[0].columns)
+        }
+        else{
+            binding.bracketView.visibility = View.GONE
+        }
+
+
+    }
+
+    private fun setupSections(sections : List<Section_>) {
+
+        val chipGroup = binding.chipGroup2
+        chipGroup.removeAllViews()
+
+        val sectionList : ArrayList<Section_> = arrayListOf()
+        var checkFirstItem : Boolean = true
+
+        for (section in sections){
+            sectionList.add(section)
+            val chip = layoutInflater.inflate(R.layout.chip_layout, chipGroup, false) as Chip
+
+            chip.apply {
+                id = ViewCompat.generateViewId()
+                setText(section.name)
+                isCheckable = true
+                if(checkFirstItem){
+                    chip.isChecked = true
+                    checkFirstItem = false
+                }
+            }
+            chipGroup.addView(chip)
+        }
+
+        chipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
+            val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
+            //Toast.makeText(chipGroup.context, titleOrNull ?: "No Choice", Toast.LENGTH_LONG).show()
+
+            var selectedIndex = 0
+            for((i,section) in sectionList.withIndex()){
+                if(section.name.equals(titleOrNull)){
+                    selectedIndex = i
+                    break
+                }
+            }
+            println("selected chip id "+selectedIndex)
+            println("selected chip colmn size "+sections[selectedIndex].columns.size)
+
+            if(sections[selectedIndex].columns.isNotEmpty()){
+                binding.bracketView.visibility = View.VISIBLE
+                updateBracket(sections[selectedIndex].columns)
+            }
+            else{
+                binding.bracketView.visibility = View.GONE
+            }
+        }
+
+        if(sections[0].columns.isNotEmpty()){
+            binding.bracketView.visibility = View.VISIBLE
+            updateBracket(sections[0].columns)
+        }
+        else{
+            binding.bracketView.visibility = View.GONE
+        }
+
+
+    }
+
 
     private fun updateBracket(columns: List<Column_>) {
 
         val columnDataList: ArrayList<ColomnData> = arrayListOf()
 
-        println("columninit size"+columns.size)
-
         for(i in columns.indices){
 
             val matchdatalist: ArrayList<MatchData> = arrayListOf()
-
 
             for (j in columns[i].cells[0].matches.indices){
                 val teamDataA = CompetitorData(columns[i].cells[0].matches[j].teams[0].name,columns[i].cells[0].matches[j].teams[0].result?.gameWins.toString(),columns[i].cells[0].matches[j].teams[0].image)
@@ -173,22 +283,16 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
                 val matchData = MatchData(teamDataA, teamDataB)
                 println("adding match data "+columns[i].cells[0].matches[j].teams[0].name+" , "+columns[i].cells[0].matches[j].teams[1].name)
                 matchdatalist.add(matchData)
-
             }
 
-            println("matchelist size"+matchdatalist.size)
-
-            val finalColomn = ColomnData(matchdatalist)
+            val finalColomn = ColomnData(matchdatalist,columns.get(i).cells[0].name)
             columnDataList.add(finalColomn)
-
         }
 
-        println("columnlist size"+columnDataList.size)
-
-
         binding.bracketView.setBracketsData(columnDataList)
-
     }
+
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -199,49 +303,5 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
         activity?.lifecycle?.removeObserver(this)
         super.onDetach()
     }
-
-
-//    private fun addDymmyData(){
-//        /////////////dummy data///////////////
-//        val player1 = CompetitorData("Player 1", "3")
-//        val player2 = CompetitorData("Player 2", "1")
-//        val player3 = CompetitorData("Player 3", "3")
-//        val player4 = CompetitorData("Player 4", "2")
-//        val player5 = CompetitorData("Player 5", "4")
-//        val player6 = CompetitorData("Player 6", "2")
-//        val player7 = CompetitorData("Player 7", "2")
-//        val player8 = CompetitorData("Player 8", "2")
-//        val player9 = CompetitorData("Player 9", "2")
-//        val player10 = CompetitorData("Player 10", "2")
-//
-//
-//        val matchQuarterFinal1 = MatchData(player1, player2)
-//        val matchQuarterFinal2 = MatchData(player3, player4)
-//        val matchQuarterFinal3 = MatchData(player5, player6)
-//        val matchQuarterFinal4 = MatchData(player7, player8)
-//        val match1SemiFinal = MatchData(player2, player4)
-//        val match2SemiFinal = MatchData(player5, player7)
-//        val match3Final = MatchData(player2, player7)
-//
-//        val quarterFinalColomn = ColomnData(
-//            mutableListOf(
-//                matchQuarterFinal1,
-//                matchQuarterFinal2,
-//                matchQuarterFinal3,
-//                matchQuarterFinal4
-//            )
-//        )
-//        val semiFinalColomn = ColomnData(mutableListOf(match1SemiFinal, match2SemiFinal))
-//        val finalColomn = ColomnData(mutableListOf(match3Final))
-//
-//
-//        binding.root.bracket_view.setBracketsData(
-//            mutableListOf(
-//                quarterFinalColomn,
-//                semiFinalColomn,
-//                finalColomn
-//            )
-//        )
-//    }
 
 }
