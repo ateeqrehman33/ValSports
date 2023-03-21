@@ -9,7 +9,7 @@
     <item
         android:id="@+id/schedule_fragment"
         android:title="@string/schedule"
-        android:icon="@drawable/live_schedule_ic"/>
+        android:icon="@drawable/schedule_icon"/>
 
     <item
         android:id="@+id/bracket_fragment"

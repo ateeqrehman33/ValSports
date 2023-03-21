@@ -2,6 +2,7 @@ package com.halil.ozel.unsplashexample.ui.fragment.schedule
 
 import DateUtils
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import cc.taylorzhang.singleclick.onSingleClick
 import com.halil.ozel.unsplashexample.databinding.FragmentScheduleBinding
 import com.halil.ozel.unsplashexample.model.allschedule.Event_
 import com.halil.ozel.unsplashexample.ui.adapter.ScheduleMatchesAdapter
+import com.halil.ozel.unsplashexample.ui.fragment.livematches.bottomsheet.ItemListDialogFragment
 import com.xcoder.animator.Animations
 import com.xcoder.animator.ScrollAnimator
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +45,18 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupData()
+
+        binding.filerIv.onSingleClick() {
+
+            val sheet = ItemListDialogFragment()
+            sheet.show(childFragmentManager, "")
+
+            childFragmentManager.executePendingTransactions()
+            sheet.dialog?.setOnDismissListener(DialogInterface.OnDismissListener {
+                println("Dissmissed")
+                viewModel.getAllSchedule()
+            })
+        }
     }
 
     private fun setupData() {
@@ -80,8 +94,6 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
                     binding.scheduleRevyclerview.visibility = View.VISIBLE
 
                 }, 1000)
-
-
 
                 binding.floatingButtonScroll.onSingleClick(){
                     binding.scheduleRevyclerview.smoothSnapToPosition(positionToScroll)

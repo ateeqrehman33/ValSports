@@ -1,6 +1,5 @@
 package com.halil.ozel.unsplashexample.ui.fragment.livematches
 
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import cc.taylorzhang.singleclick.onSingleClick
+import com.halil.ozel.unsplashexample.R
 import com.halil.ozel.unsplashexample.databinding.FragmentLiveBinding
 import com.halil.ozel.unsplashexample.ui.adapter.ImageAdapter
 import com.halil.ozel.unsplashexample.ui.adapter.UpcomingMatchesAdapter
 import com.halil.ozel.unsplashexample.ui.fragment.livematches.bottomsheet.ItemListDialogFragment
+import com.halil.ozel.unsplashexample.utils.WaveAnimation
 import com.xcoder.animator.Animations
 import com.xcoder.animator.ScrollAnimator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_live.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -34,32 +39,86 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver  {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLiveBinding.inflate(layoutInflater)
+
+
+        setupRecyclerviews()
+        subscribeToObservers()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupData()
+
+
+
+        binding.filerIv.onSingleClick() {
+
+            val sheet = ItemListDialogFragment()
+            sheet.show(childFragmentManager, "")
+            childFragmentManager.executePendingTransactions()
+            sheet.dialog?.setOnDismissListener(DialogInterface.OnDismissListener {
+                println("Dissmissed")
+                viewModel.getUpcomingMatches()
+            })
+        }
+
+
+        ssPullRefresh.setRefreshView(WaveAnimation(requireContext()))
+
+
+
+        binding.ssPullRefresh.setOnRefreshListener {
+            CoroutineScope(Dispatchers.Main).launch {
+               // delay(2000)
+                viewModel.getAllImages()
+                viewModel.getUpcomingMatches()
+
+            }
+        }
+        binding.ssPullRefresh.setGifAnimation(R.raw.jett)
+
+
+
+
+    }
+
+    private fun setupRecyclerviews(){
+
+        binding.recyclerView.apply {
+            imageAdapter = ImageAdapter()
+            adapter = imageAdapter
+        }
+        binding.rvUpcoming.apply {
+            upcomingadapter = UpcomingMatchesAdapter()
+            adapter = upcomingadapter
+            setHasFixedSize(true)
+            isNestedScrollingEnabled = false
+
+            ScrollAnimator.create()
+                .withAnimation(Animations.ANIMATION_SLIDE_FROM_LEFT)
+                .withInterpolator(Animations.INTERPOLATOR_FAST_OUT_SLOW)
+                .tillDuration(Animations.DURATION_FAST)
+                .playOnlyOnDownScroll(true)
+                .animate(this);
+        }
     }
 
 
-    private fun setupData() {
+    private fun subscribeToObservers() {
 
-
-
-        imageAdapter = ImageAdapter()
-        binding.recyclerView.apply {
-            adapter = imageAdapter
-            setHasFixedSize(true)
-
-        }
 
         viewModel.responseImages.observe(requireActivity()) { response ->
             if (response != null && response.isNotEmpty()) {
+
                 imageAdapter.submitList(response)
-                binding.shimmerFrameLayout.stopShimmer()
-                binding.shimmerFrameLayout.visibility = View.GONE
-                binding.recyclerView.visibility = View.VISIBLE
+                binding.rvUpcoming.postDelayed({
+                    binding.shimmerFrameLayout.stopShimmer()
+
+                    binding.shimmerFrameLayout.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                }, 1000)
+
             }
             else{
                 binding.recyclerView.visibility = View.GONE
@@ -69,71 +128,28 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver  {
             }
         }
 
-        upcomingadapter = UpcomingMatchesAdapter()
-        binding.rvUpcoming.apply {
-            adapter = upcomingadapter
-            setHasFixedSize(false)
-            isNestedScrollingEnabled = false
-
-            ScrollAnimator.create()
-                .withAnimation(Animations.ANIMATION_SLIDE_FROM_LEFT)
-                .withInterpolator(Animations.INTERPOLATOR_FAST_OUT_SLOW)
-                .tillDuration(Animations.DURATION_FAST)
-                .playOnlyOnDownScroll(false)
-                .animate(this);
-
-        }
-
-
         viewModel.responseUpcoming.observe(requireActivity()) { response ->
             if (response != null) {
                 upcomingadapter.submitList(response)
-                binding.shimmerFrameLayoutUpcoming.stopShimmer()
-                binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
-                binding.rvUpcoming.visibility = View.VISIBLE
+
+                binding.rvUpcoming.postDelayed({
+                    binding.shimmerFrameLayoutUpcoming.stopShimmer()
+
+                    binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
+                    binding.rvUpcoming.visibility = View.VISIBLE
+                }, 1000)
+
             }
             else{
                 binding.rvUpcoming.visibility = View.GONE
                 binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
-
             }
+            binding.ssPullRefresh.setRefreshing(false) // This stops refreshing
+
         }
 
-        binding.filerIv.onSingleClick() {
 
-                val sheet = ItemListDialogFragment()
-                sheet.show(childFragmentManager, "")
 
-            childFragmentManager.executePendingTransactions()
-            sheet.dialog?.setOnDismissListener(DialogInterface.OnDismissListener {
-                println("Dissmissed")
-                viewModel.getUpcomingMatches()
-            })
-        }
     }
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activity?.lifecycle?.addObserver(this)
-    }
-
-    override fun onDetach() {
-        activity?.lifecycle?.removeObserver(this)
-        super.onDetach()
-    }
-
-    override fun onResume() {
-        super<Fragment>.onResume()
-        binding.shimmerFrameLayout.startShimmer()
-        binding.shimmerFrameLayoutUpcoming.startShimmer()
-    }
-
-    override fun onPause() {
-        binding.shimmerFrameLayout.stopShimmer()
-        binding.shimmerFrameLayoutUpcoming.stopShimmer()
-        super<Fragment>.onPause()
-    }
-
 
 }

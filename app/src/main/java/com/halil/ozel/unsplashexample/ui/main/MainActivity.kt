@@ -2,25 +2,24 @@ package com.halil.ozel.unsplashexample.ui.main
 
 import android.os.Bundle
 import android.os.Handler
-import android.text.TextUtils.replace
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.halil.ozel.unsplashexample.R
 import com.halil.ozel.unsplashexample.databinding.ActivityMainBinding
 import com.halil.ozel.unsplashexample.ui.fragment.brackets.BracketsFragment
 import com.halil.ozel.unsplashexample.ui.fragment.livematches.LiveFragment
 import com.halil.ozel.unsplashexample.ui.fragment.schedule.ScheduleFragment
+import com.microsoft.appcenter.AppCenter
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.crashes.Crashes
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.ScheduledThreadPoolExecutor
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
@@ -71,6 +70,11 @@ class MainActivity : AppCompatActivity(){
         }
 
 
+        AppCenter.start(
+            application, "d66153b1-65b7-4c7c-aa72-e636f48e0a0a",
+            Analytics::class.java, Crashes::class.java
+        )
+
 
     }
 
@@ -80,8 +84,6 @@ class MainActivity : AppCompatActivity(){
             replace(R.id.fragNavHost, fragment)
             commit()
         }
-
-
 
 
     private var backPressedOnce = false
@@ -109,4 +111,3 @@ class MainActivity : AppCompatActivity(){
 
 }
 
-//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

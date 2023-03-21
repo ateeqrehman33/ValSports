@@ -104,9 +104,10 @@ dependencies {
     implementation "com.google.android.material:material:1.9.0-alpha02"
     implementation "com.github.vedraj360:ChipRecyclerView:Release-1.0.5"
 
+         def appCenterSdkVersion = '4.4.5'
+        implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+        implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
 
-
-
-
+    implementation 'com.github.SimformSolutionsPvtLtd:SSPullToRefresh:1.4'
 
 }

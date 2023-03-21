@@ -82,6 +82,12 @@ class UpcomingMatchesAdapter : RecyclerView.Adapter<UpcomingMatchesAdapter.Image
             else if(daysPassed in 2..4){
                 dateTitle.text = ""+DateUtils.formatDate(formatedDate,"EEEE")
             }
+            else if(daysPassed in 2..10){
+                dateTitle.text = ""+DateUtils.formatDate(formatedDate,"EEEE")
+            }
+            else if(daysPassed in 2..20){
+                dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd yyyy")
+            }
             else{
                 dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd yyyy")
 
@@ -93,5 +99,7 @@ class UpcomingMatchesAdapter : RecyclerView.Adapter<UpcomingMatchesAdapter.Image
     }
 
     override fun getItemCount() = differ.currentList.size
-
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 }

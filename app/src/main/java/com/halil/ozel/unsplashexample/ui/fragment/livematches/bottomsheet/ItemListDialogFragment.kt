@@ -1,5 +1,6 @@
 package com.halil.ozel.unsplashexample.ui.fragment.livematches.bottomsheet
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,9 +44,11 @@ class ItemListDialogFragment  : SuperBottomSheetFragment(), DefaultLifecycleObse
         }
 
 
-        viewModel.responseImages.observe(requireActivity()) { response ->
+        viewModel.responseImages.observe(viewLifecycleOwner) { response ->
             if (response != null && response.isNotEmpty()) {
                 leagueAdapter.submitList(response)
+                binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
+                binding.leagueRv.visibility = View.VISIBLE
             }
             else{
 
@@ -58,6 +61,8 @@ class ItemListDialogFragment  : SuperBottomSheetFragment(), DefaultLifecycleObse
 
 
     }
+
+    override fun getBackgroundColor() = Color.BLACK
 
 
 

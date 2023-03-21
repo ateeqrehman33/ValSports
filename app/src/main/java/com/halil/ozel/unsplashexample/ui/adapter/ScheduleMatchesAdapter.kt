@@ -57,6 +57,7 @@ class ScheduleMatchesAdapter : RecyclerView.Adapter<ScheduleMatchesAdapter.Image
 
             title.text = currImage.league.name
 
+            try {
 
                 teamAname.text = currImage.match.teams[0].code
                 teamBname.text = currImage.match.teams[1].code
@@ -65,7 +66,6 @@ class ScheduleMatchesAdapter : RecyclerView.Adapter<ScheduleMatchesAdapter.Image
                     crossfade(true)
                     placeholder(R.drawable.valorant_masters_lightmode)
                     //transformations(CircleCropTransformation())
-
                 }
                 teamABiv.load(currImage.match.teams[1].image){
                     crossfade(true)
@@ -73,63 +73,72 @@ class ScheduleMatchesAdapter : RecyclerView.Adapter<ScheduleMatchesAdapter.Image
                     ///transformations(CircleCropTransformation())
                 }
 
-            val formatedDate : Date = DateUtils.formatDate(currImage.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
-            val nowDate : Date = DateUtils.now()
-            val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
+
+
+                val formatedDate : Date = DateUtils.formatDate(currImage.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
+                val nowDate : Date = DateUtils.now()
+                val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
 
 
 
-            if(DateUtils.isSameDaynew(formatedDate,nowDate)){
-                dateTitle.text = "Today"
+                if(DateUtils.isSameDaynew(formatedDate,nowDate)){
+                    dateTitle.text = "Today"
 
-            }
-            else if(DateUtils.isSameDaynew(formatedDate,DateUtils.addOneDay(nowDate))){
-                dateTitle.text = "Tomorrow"
-            }
-            else if(daysPassed in 2..4){
-                dateTitle.text = ""+DateUtils.formatDate(formatedDate,"EEEE")
-            }
-            else{
-                dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd")
-
-            }
-
-            datetime.text = DateUtils.formatDate(formatedDate,"HH:mm")
-            dateYear.text = DateUtils.getYear(formatedDate).toString()
-
-            if(currImage.state == "completed"){
-                scoreCons.visibility = View.VISIBLE
-                viewline.setBackgroundColor(ContextCompat.getColor(context,R.color.md_red_400))
-
-                teamAscore.text = currImage.match.teams[0].result?.gameWins.toString()
-                teamBscore.text = currImage.match.teams[1].result?.gameWins.toString()
-
-                if(currImage.match.teams[0].result?.outcome.equals("win")){
-                    teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
                 }
-                else if(currImage.match.teams[0].result?.outcome.equals("loss")){
-                    teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                else if(DateUtils.isSameDaynew(formatedDate,DateUtils.addOneDay(nowDate))){
+                    dateTitle.text = "Tomorrow"
+                }
+                else if(daysPassed in 2..4){
+                    dateTitle.text = ""+DateUtils.formatDate(formatedDate,"EEEE")
+                }
+                else{
+                    dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd")
+
                 }
 
-                if(currImage.match.teams[1].result?.outcome.equals("win")){
-                    teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                datetime.text = DateUtils.formatDate(formatedDate,"HH:mm")
+                dateYear.text = DateUtils.getYear(formatedDate).toString()
+
+                if(currImage.state == "completed"){
+                    scoreCons.visibility = View.VISIBLE
+                    viewline.setBackgroundColor(ContextCompat.getColor(context,R.color.md_red_400))
+
+                    teamAscore.text = currImage.match.teams[0].result?.gameWins.toString()
+                    teamBscore.text = currImage.match.teams[1].result?.gameWins.toString()
+
+                    if(currImage.match.teams[0].result?.outcome.equals("win")){
+                        teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    }
+                    else if(currImage.match.teams[0].result?.outcome.equals("loss")){
+                        teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    }
+
+                    if(currImage.match.teams[1].result?.outcome.equals("win")){
+                        teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    }
+                    else if(currImage.match.teams[1].result?.outcome.equals("loss")){
+                        teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                    }
+
                 }
-                else if(currImage.match.teams[1].result?.outcome.equals("loss")){
-                    teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
+                else{
+                    scoreCons.visibility = View.GONE
+                    viewline.setBackgroundColor(ContextCompat.getColor(context,R.color.md_teal_400))
+
                 }
 
-            }
-            else{
-                scoreCons.visibility = View.GONE
-                viewline.setBackgroundColor(ContextCompat.getColor(context,R.color.md_teal_400))
+            }catch (e : Exception){
 
+                teamAname.text = "NA"
+                teamBname.text = "NA"
             }
-
 
         }
     }
 
     override fun getItemCount() = differ.currentList.size
-
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
 }

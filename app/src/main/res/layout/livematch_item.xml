@@ -272,7 +272,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
+                    android:id="@+id/LLBtnYoutube"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -307,13 +307,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout3"
+                    android:id="@+id/LLBtnTwitch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+                    app:layout_constraintStart_toEndOf="@+id/LLBtnYoutube"
                     app:layout_constraintTop_toTopOf="parent">
 
 

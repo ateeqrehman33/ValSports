@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="bracket_background">#1c222e</color>
     <color name="bracket_color">#262e40</color>
+
+    <color name="darknewbg">#000000</color>
+    <color name="darknewbgsec">#1A2028</color>
+
 </resources>

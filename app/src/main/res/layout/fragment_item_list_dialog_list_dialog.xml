@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/darknewbgsec"
-            android:paddingVertical="8dp"
+            android:paddingVertical="16dp"
             android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,10 +71,56 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
             tools:listitem="@layout/fragment_item_list_dialog_list_dialog_item" />
 
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayoutUpcoming"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            android:visibility="visible"
+            app:shimmer_auto_start="true">
+
+            <!-- Adding 15 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+
+
+                <include layout="@layout/skeleton_league_filter_item" />
+
+                <include layout="@layout/skeleton_league_filter_item" />
+
+                <include layout="@layout/skeleton_league_filter_item" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
 
 

@@ -25,15 +25,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <ImageView
-                android:id="@+id/filerIv"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/filter_ic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
@@ -44,6 +35,7 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -161,6 +153,63 @@
         </com.google.android.material.chip.ChipGroup>
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/NodataView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/darknewbgsec"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayosut2">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:paddingVertical="20dp"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/textVieew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweathersans_extrabold"
+                    android:text="No brackets found"
+                    android:textColor="@color/md_blue_grey_500"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/textViesew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/merriweathersans_extrabold"
+                    android:text="Select League &amp; Tournament"
+                    android:textColor="@color/md_teal_A700"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
         <com.ventura.bracketslib.BracketsView
             android:id="@+id/bracket_view"
             android:layout_width="match_parent"
@@ -173,7 +222,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chip_group2" />
 
-<!--        <com.ventura.bracketslib.BracketsView-->
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rankingsRevyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group2"
+            tools:listitem="@layout/rankings_item" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group2"
+            app:lottie_autoPlay="true"
+            android:visibility="visible"
+            app:lottie_fileName="loader.json"
+            app:lottie_loop="true"
+            app:lottie_speed="1" />
+
+
+        <!--        <com.ventura.bracketslib.BracketsView-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

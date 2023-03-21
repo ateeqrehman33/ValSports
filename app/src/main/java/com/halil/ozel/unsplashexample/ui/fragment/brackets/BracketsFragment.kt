@@ -13,11 +13,9 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import com.google.android.material.chip.Chip
 import com.halil.ozel.unsplashexample.R
 import com.halil.ozel.unsplashexample.databinding.FragmentBracketsBinding
-import com.halil.ozel.unsplashexample.model.brackets.Column_
-import com.halil.ozel.unsplashexample.model.brackets.Section_
-import com.halil.ozel.unsplashexample.model.brackets.Stage_
-import com.halil.ozel.unsplashexample.model.brackets.Standing_
+import com.halil.ozel.unsplashexample.model.brackets.*
 import com.halil.ozel.unsplashexample.model.leagues.League_
+import com.halil.ozel.unsplashexample.ui.adapter.RankingsAdapter
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.ventura.bracketslib.model.ColomnData
@@ -31,20 +29,34 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
     private lateinit var binding: FragmentBracketsBinding
     private val viewModel: BracketsViewModel by viewModels()
+    private lateinit var rankingsAdapter : RankingsAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val baseInflater = LayoutInflater.from(requireActivity()) // NOT context
-        binding = FragmentBracketsBinding.inflate(baseInflater)
+        binding = FragmentBracketsBinding.inflate(LayoutInflater.from(requireActivity()))
+       // binding = FragmentBracketsBinding.inflate(layoutInflater)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        rankingsAdapter = RankingsAdapter(requireContext())
+
+        binding.lottieAnimationView2.visibility = View.VISIBLE
+
+
+        binding.rankingsRevyclerview.apply {
+            adapter = rankingsAdapter
+            setHasFixedSize(true)
+            isNestedScrollingEnabled = false
+        }
+
         setupData()
     }
 
@@ -58,7 +70,6 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
         viewModel.responseImages.observe(requireActivity()) { standings ->
             if (standings != null) {
-                //setupStandings(standings)
                 setupTournamentData(standings)
 
             }
@@ -95,6 +106,9 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
             setIsFocusable(true)
             //selectItemByIndex(selectedtourIdpos)
             lifecycleOwner = this@BracketsFragment
+            binding.lottieAnimationView2.visibility = View.GONE
+            binding.NodataView.visibility = View.VISIBLE
+
             setOnSpinnerDismissListener {
                 println("selected index  : "+binding.dropdownLeague.selectedIndex)
                 if(binding.dropdownLeague.selectedIndex>=0){
@@ -108,8 +122,14 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
                     binding.dropdownTournament.clearSelectedItem()
                     binding.bracketView.visibility = View.GONE
+                    binding.chipGroup.removeAllViews()
+                    binding.chipGroup2.removeAllViews()
+                    binding.rankingsRevyclerview.visibility = View.GONE
+
+                    binding.lottieAnimationView2.visibility = View.VISIBLE
+                    binding.NodataView.visibility = View.GONE
+
                     viewModel.updateBracketsByTourId(s)
-                    //setupTournamentData(leagues.get(binding.dropdownLeague.selectedIndex).tournaments)
                 }
             }
         }
@@ -130,13 +150,17 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
         binding.dropdownTournament.apply {
             getSpinnerRecyclerView().adapter = tourdapter
             tourdapter.setItems(listoftour)
-            //selectItemByIndex(0)
+
+            binding.lottieAnimationView2.visibility = View.GONE
+            binding.NodataView.visibility = View.VISIBLE
+
             setOnSpinnerDismissListener {
                 try {
 
                     if(binding.dropdownLeague.selectedIndex>=0){
                         if(standings.get(binding.dropdownTournament.selectedIndex).stages.isEmpty()){
                             println("no stages data")
+                            binding.NodataView.visibility = View.VISIBLE
                         }
                         else{
                             setupStages(standings.get(binding.dropdownTournament.selectedIndex).stages)
@@ -191,20 +215,54 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
             if(stages[selectedIndex].sections[0].columns.isNotEmpty()){
                 binding.bracketView.visibility = View.VISIBLE
-                //updateBracket(stages[selectedIndex].sections[0].columns)
+                binding.rankingsRevyclerview.visibility = View.GONE
+
                 setupSections(stages[selectedIndex].sections)
+
+            }
+            else if(stages[0].sections[0].rankings[0].teams.isNotEmpty()){
+                binding.rankingsRevyclerview.visibility = View.VISIBLE
+                binding.bracketView.visibility = View.GONE
+                setupSections(stageList[0].sections)
+
             }
             else{
+                binding.NodataView.visibility = View.VISIBLE
                 binding.bracketView.visibility = View.GONE
+                binding.rankingsRevyclerview.visibility = View.GONE
             }
         }
 
         if(stages[0].sections[0].columns.isNotEmpty()){
             binding.bracketView.visibility = View.VISIBLE
-            updateBracket(stages[0].sections[0].columns)
+            binding.rankingsRevyclerview.visibility = View.GONE
+            binding.NodataView.visibility = View.GONE
+
+            setupSections(stageList[0].sections)
+
+        }
+        else if(stages[0].sections[0].rankings[0].teams.isNotEmpty()){
+
+            val teamlist : ArrayList<Team_X> = arrayListOf()
+
+            for(ranking in stages[0].sections[0].rankings){
+                for ((i,team) in ranking.teams.withIndex()){
+                    team.ordinal = ranking.ordinal.toString()
+                    teamlist.add(team)
+                }
+            }
+
+            rankingsAdapter.submitList(teamlist)
+            binding.bracketView.visibility = View.GONE
+            binding.rankingsRevyclerview.visibility = View.VISIBLE
+            binding.NodataView.visibility = View.GONE
+
+            setupSections(stageList[0].sections)
+
+
         }
         else{
-            binding.bracketView.visibility = View.GONE
+            binding.NodataView.visibility = View.VISIBLE
         }
 
 
@@ -236,7 +294,6 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
         chipGroup.setOnCheckedChangeListener { chipGroup, checkedId ->
             val titleOrNull = chipGroup.findViewById<Chip>(checkedId)?.text
-            //Toast.makeText(chipGroup.context, titleOrNull ?: "No Choice", Toast.LENGTH_LONG).show()
 
             var selectedIndex = 0
             for((i,section) in sectionList.withIndex()){
@@ -245,24 +302,67 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
                     break
                 }
             }
-            println("selected chip id "+selectedIndex)
-            println("selected chip colmn size "+sections[selectedIndex].columns.size)
 
             if(sections[selectedIndex].columns.isNotEmpty()){
                 binding.bracketView.visibility = View.VISIBLE
                 updateBracket(sections[selectedIndex].columns)
+                println("not empty columns "+sections[selectedIndex].columns.size)
+                binding.rankingsRevyclerview.visibility = View.GONE
+                binding.NodataView.visibility = View.GONE
+
+            }
+            else if(sections[selectedIndex].rankings[0].teams.isNotEmpty()){
+
+                val teamlist : ArrayList<Team_X> = arrayListOf()
+
+                for(ranking in sections[selectedIndex].rankings){
+                    for ((i,team) in ranking.teams.withIndex()){
+                        team.ordinal = ranking.ordinal.toString()
+                        teamlist.add(team)
+                    }
+                }
+
+                rankingsAdapter.submitList(teamlist)
+                binding.bracketView.visibility = View.GONE
+                binding.rankingsRevyclerview.visibility = View.VISIBLE
+                binding.NodataView.visibility = View.GONE
+
             }
             else{
-                binding.bracketView.visibility = View.GONE
+
+                println(" empty columns "+sections[selectedIndex].columns.size)
+                binding.NodataView.visibility = View.GONE
             }
         }
 
         if(sections[0].columns.isNotEmpty()){
             binding.bracketView.visibility = View.VISIBLE
             updateBracket(sections[0].columns)
+            println("not empty columns "+sections[0].columns.size)
+            binding.NodataView.visibility = View.GONE
+            binding.rankingsRevyclerview.visibility = View.GONE
+
+
+        }
+        else if(sections[0].rankings[0].teams.isNotEmpty()){
+            val teamlist : ArrayList<Team_X> = arrayListOf()
+
+            for(ranking in sections[0].rankings){
+                for ((i,team) in ranking.teams.withIndex()){
+                    team.ordinal = ranking.ordinal.toString()
+                    teamlist.add(team)
+                }
+            }
+
+            rankingsAdapter.submitList(teamlist)
+            binding.bracketView.visibility = View.GONE
+            binding.rankingsRevyclerview.visibility = View.VISIBLE
+            binding.NodataView.visibility = View.GONE
+
         }
         else{
-            binding.bracketView.visibility = View.GONE
+            binding.NodataView.visibility = View.VISIBLE
+
         }
 
 
@@ -271,25 +371,35 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
 
     private fun updateBracket(columns: List<Column_>) {
 
-        val columnDataList: ArrayList<ColomnData> = arrayListOf()
+        try {
 
-        for(i in columns.indices){
+            val columnDataList: ArrayList<ColomnData> = arrayListOf()
 
-            val matchdatalist: ArrayList<MatchData> = arrayListOf()
+            for(i in columns.indices){
 
-            for (j in columns[i].cells[0].matches.indices){
-                val teamDataA = CompetitorData(columns[i].cells[0].matches[j].teams[0].name,columns[i].cells[0].matches[j].teams[0].result?.gameWins.toString(),columns[i].cells[0].matches[j].teams[0].image)
-                val teamDataB = CompetitorData(columns[i].cells[0].matches[j].teams[1].name,columns[i].cells[0].matches[j].teams[1].result?.gameWins.toString(),columns[i].cells[0].matches[j].teams[1].image)
-                val matchData = MatchData(teamDataA, teamDataB)
-                println("adding match data "+columns[i].cells[0].matches[j].teams[0].name+" , "+columns[i].cells[0].matches[j].teams[1].name)
-                matchdatalist.add(matchData)
+                val matchdatalist: ArrayList<MatchData> = arrayListOf()
+
+                for (j in columns[i].cells[0].matches.indices){
+                    val teamDataA = CompetitorData(columns[i].cells[0].matches[j].teams[0].name,columns[i].cells[0].matches[j].teams[0].result?.gameWins.toString(),columns[i].cells[0].matches[j].teams[0].image)
+                    val teamDataB = CompetitorData(columns[i].cells[0].matches[j].teams[1].name,columns[i].cells[0].matches[j].teams[1].result?.gameWins.toString(),columns[i].cells[0].matches[j].teams[1].image)
+                    val matchData = MatchData(teamDataA, teamDataB)
+                    println("adding match data "+columns[i].cells[0].matches[j].teams[0].name+" , "+columns[i].cells[0].matches[j].teams[1].name)
+                    matchdatalist.add(matchData)
+                }
+
+                val finalColomn = ColomnData(matchdatalist,columns.get(i).cells[0].name)
+                columnDataList.add(finalColomn)
             }
 
-            val finalColomn = ColomnData(matchdatalist,columns.get(i).cells[0].name)
-            columnDataList.add(finalColomn)
+            binding.bracketView.setBracketsData(columnDataList)
+
+        }catch (e : Exception){
+
+            binding.NodataView.visibility = View.VISIBLE
+
+
         }
 
-        binding.bracketView.setBracketsData(columnDataList)
     }
 
 

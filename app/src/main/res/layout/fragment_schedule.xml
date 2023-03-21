@@ -30,11 +30,18 @@
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
+            <ImageView
+                android:id="@+id/filerIv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/filter_ic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
 
 

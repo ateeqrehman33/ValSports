@@ -21,4 +21,12 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/bracket_fragment"
+        android:name="com.halil.ozel.unsplashexample.ui.fragment.brackets.BracketsFragment"
+        android:label="Standings"
+        tools:layout="@layout/fragment_brackets" >
+
+    </fragment>
+
 </navigation>

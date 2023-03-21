@@ -1,6 +1,10 @@
 package com.halil.ozel.unsplashexample.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -117,21 +121,25 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
 
             var streamlist : List<Stream_> = currImage.streams
-            var parameter : String = ""
+            var youtubeparam : String = ""
+            var twitcheparam : String = ""
 
             for(item in streamlist){
                 if(item.provider.equals("youtube")){
                     println("youtube")
-
-                    parameter = item.parameter
-
+                    youtubeparam = item.parameter
 
                 }else if(item.provider.equals("twitch")){
-
-                    println(item.provider+"  : "+ item.parameter )
-
+                    twitcheparam = item.parameter
                 }
+            }
 
+            LLBtnYoutube.setOnClickListener {
+                context.watchYoutube(youtubeparam)
+            }
+
+            LLBtnTwitch.setOnClickListener {
+                context.watchTwitch(twitcheparam)
             }
 
 
@@ -148,5 +156,28 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
         private const val DURATION_MILLIS = 1000
         private val lifecycle: Lifecycle? = null
 
+    }
+
+    fun Context.watchYoutube(id: String) {
+        val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:$id"))
+        val webIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://youtu.be/$id")
+        )
+        try {
+            this.startActivity(appIntent)
+        } catch (ex: ActivityNotFoundException) {
+            this.startActivity(webIntent)
+        }
+    }
+
+    fun Context.watchTwitch(id: String) {
+        val defaultBrowser = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER)
+        defaultBrowser.data = Uri.parse("https://www.twitch.tv/$id")
+        startActivity(defaultBrowser)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 }

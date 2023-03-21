@@ -30,11 +30,12 @@ class LiveViewModel @Inject constructor(private val repository: ImageRepository,
 
 
     init {
+
         getAllImages()
         getUpcomingMatches()
     }
 
-    private fun getAllImages() = viewModelScope.launch {
+    fun getAllImages() = viewModelScope.launch {
         repository.getAllImages().let { response ->
             if (response.isSuccessful) {
                 _response.postValue(response.body()!!.data.schedule.events)
