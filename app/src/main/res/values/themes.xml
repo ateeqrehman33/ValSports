@@ -16,6 +16,14 @@
     </style>
 
 
+    <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/darknewbgsec</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/background_splash</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@style/Theme.UnsplashExample</item>
+    </style>
+
+
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
         <item name="colorControlActivated">@color/teal_200</item>

@@ -13,24 +13,18 @@
 
 
 
-        <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.fragment.app.FragmentContainerView
+            <fragment
                 android:id="@+id/fragNavHost"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_graph" />
+                app:navGraph="@navigation/nav_graph"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        </FrameLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavView"

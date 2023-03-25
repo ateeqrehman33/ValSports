@@ -7,15 +7,19 @@
 
     <fragment
         android:id="@+id/live_fragment"
-        android:name="com.halil.ozel.unsplashexample.ui.fragment.livematches.LiveFragment"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.livematches.LiveFragment"
         android:label="Live"
         tools:layout="@layout/fragment_live" >
+
+        <action
+            android:id="@+id/action_live_to_aboutdev"
+            app:destination="@id/about_dev" />
 
     </fragment>
 
     <fragment
         android:id="@+id/schedule_fragment"
-        android:name="com.halil.ozel.unsplashexample.ui.fragment.schedule.ScheduleFragment"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.schedule.ScheduleFragment"
         android:label="Schedule"
         tools:layout="@layout/fragment_schedule" >
 
@@ -23,10 +27,21 @@
 
     <fragment
         android:id="@+id/bracket_fragment"
-        android:name="com.halil.ozel.unsplashexample.ui.fragment.brackets.BracketsFragment"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.brackets.BracketsFragment"
         android:label="Standings"
         tools:layout="@layout/fragment_brackets" >
 
     </fragment>
+
+    <fragment
+        android:id="@+id/about_dev"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.aboutdev.AboutDevFragment"
+        android:label="About Dev"
+        tools:layout="@layout/fragment_member_detail" >
+
+    </fragment>
+
+
+
 
 </navigation>
