@@ -21,27 +21,29 @@
             android:id="@+id/textView3"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/logo_jett"
-            android:padding="8dp"
-            android:rotation="45"
+            android:src="@drawable/logo_valsports"
+            android:layout_marginStart="8dp"
+            android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
-            android:layout_width="150dp"
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logo_new"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white">
+            android:fontFamily="@font/valo_font"
+            android:text="alSports"
+            android:textStyle="bold"
+            android:textColor="#FF03DAC5"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView3"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toTopOf="@+id/textView3">
 
-        </ImageView>
+        </TextView>
+
 
         <ImageView
             android:id="@+id/threedots"
@@ -98,7 +100,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/valo_font"
                     android:text="Live Matches"
-                    android:textColor="@color/md_red_400"
+                    android:textColor="@color/md_red_300"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -202,10 +204,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/valo_font"
                     android:text="UPCOMING"
-                    android:textColor="@color/md_red_400"
+                    android:textColor="@color/md_red_300"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -250,6 +252,7 @@
                     android:visibility="visible"
                     app:layout_constraintTop_toBottomOf="@+id/textView2"
                     app:shimmer_auto_start="true"
+                    app:shimmer_repeat_mode="restart"
                     tools:layout_editor_absoluteX="16dp">
 
                     <!-- Adding 15 rows of placeholders -->

@@ -2,7 +2,6 @@
 import android.annotation.SuppressLint
 import java.math.BigDecimal
 import java.sql.Timestamp
-import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -550,7 +549,9 @@ object DateUtils {
         return isSameDaynew(other,now)
     }
 
-
+    fun secondsBetween(first: Date, second: Date): Long {
+        return (second.time - first.time) / 1000
+    }
 
 
 

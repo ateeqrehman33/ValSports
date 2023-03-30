@@ -64,28 +64,7 @@ class FilterLeagueAdapter(private val context: Context): RecyclerView.Adapter<Fi
             leagueName.text = currImage.name
 
             val list : ArrayList<String> = tinyDB.getListString(Constants.League_ID)
-
-            if(list.isEmpty()){
-                if(currImage.displayPriority.status.equals("force_selected")) {
-                    leagueSwitch.isChecked = true
-                    leagueSwitch.isEnabled = false
-                }
-                else if(currImage.displayPriority.status.equals("selected")){
-                    leagueSwitch.isChecked = true
-                }
-
-            }
-            else if(list.contains(currImage.id)){
-                leagueSwitch.isChecked = true
-            }
-
-
-
-
-
-
-
-
+            leagueSwitch.isChecked = list.contains(currImage.id)
 
 
             leagueSwitch.setOnCheckedChangeListener { buttonView, isChecked ->

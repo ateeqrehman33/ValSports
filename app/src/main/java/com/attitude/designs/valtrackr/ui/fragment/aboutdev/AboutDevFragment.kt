@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.navigation.Navigation
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.attitude.designs.valtrackr.R
 import com.attitude.designs.valtrackr.databinding.FragmentMemberDetailBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -27,10 +27,6 @@ class AboutDevFragment : Fragment(), DefaultLifecycleObserver {
 
         binding = FragmentMemberDetailBinding.inflate(layoutInflater)
 
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavView)
-        navBar.visibility = View.GONE
-
-
         return binding.root
     }
 
@@ -45,6 +41,8 @@ class AboutDevFragment : Fragment(), DefaultLifecycleObserver {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavView)
+        navBar.visibility = View.GONE
         activity?.lifecycle?.addObserver(this)
     }
 

@@ -43,15 +43,6 @@ class ScheduleViewModel  @Inject constructor(private val repository: ImageReposi
                  }
              }
 
-         }else{
-
-             repository.getSchedule().let { response ->
-                 if (response.isSuccessful) {
-                     _response.postValue(response.body()!!.data.schedule.events)
-                 } else {
-                     println("Error ${response.errorBody()}")
-                 }
-             }
          }
 
 

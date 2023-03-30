@@ -31,11 +31,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/valo_font"
                 android:text="Standings"
-                android:textColor="@color/white"
+                android:textColor="#FF03DAC5"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

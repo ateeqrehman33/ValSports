@@ -15,6 +15,8 @@ import com.attitude.designs.valtrackr.databinding.ActivityMainBinding
 import com.attitude.designs.valtrackr.ui.fragment.aboutdev.AboutDevFragment
 import com.attitude.designs.valtrackr.ui.fragment.brackets.BracketsFragment
 import com.attitude.designs.valtrackr.ui.fragment.livematches.LiveFragment
+import com.attitude.designs.valtrackr.ui.fragment.news.NewsFragment
+import com.attitude.designs.valtrackr.ui.fragment.newsdetails.WebViewFragment
 import com.attitude.designs.valtrackr.ui.fragment.schedule.ScheduleFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.microsoft.appcenter.AppCenter
@@ -65,6 +67,14 @@ class MainActivity : AppCompatActivity(){
 
                 R.id.about_dev-> {
                     setCurrentFragment(AboutDevFragment())
+                    true
+                }
+                R.id.news_fragment-> {
+                    setCurrentFragment(NewsFragment())
+                    true
+                }
+                R.id.webview_fragment-> {
+                    setCurrentFragment(WebViewFragment())
                     true
                 }
 

@@ -30,7 +30,6 @@ class LiveViewModel @Inject constructor(private val repository: ImageRepository,
 
 
     init {
-
         getAllImages()
         getUpcomingMatches()
     }
@@ -51,7 +50,6 @@ class LiveViewModel @Inject constructor(private val repository: ImageRepository,
         val list : ArrayList<String> = tinyDB.getListString(Constants.League_ID)
         val s: String = TextUtils.join(",", list)
 
-
         if(list.isNotEmpty()){
             repository.getUpcomingMatches(s).let { response2 ->
                 if (response2.isSuccessful) {
@@ -61,16 +59,5 @@ class LiveViewModel @Inject constructor(private val repository: ImageRepository,
                 }
             }
         }
-        else{
-            repository.getUpcomingMatches().let { response2 ->
-                if (response2.isSuccessful) {
-                    upcoming_response.postValue(response2.body()!!.data.unstarted.events)
-                } else {
-                    println("Error ${response2.errorBody()}")
-                }
-            }
-        }
-
-
     }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import cc.taylorzhang.singleclick.onSingleClick
 import coil.load
 import com.attitude.designs.valtrackr.R
 import com.attitude.designs.valtrackr.databinding.UpcomingMatchItemBinding
@@ -14,20 +15,23 @@ import com.attitude.designs.valtrackr.model.unstarted.UpcomingEvent_
 import java.util.*
 
 
-class UpcomingMatchesAdapter : RecyclerView.Adapter<UpcomingMatchesAdapter.ImageViewHolder>() {
+class UpcomingMatchesAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<UpcomingMatchesAdapter.ImageViewHolder>() {
 
 
     inner class ImageViewHolder(val binding:UpcomingMatchItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 
+
+
+
     private val diffCallback = object : DiffUtil.ItemCallback<UpcomingEvent_>() {
         override fun areItemsTheSame(oldItem: UpcomingEvent_, newItem: UpcomingEvent_): Boolean {
-            return oldItem.league.id == newItem.league.id
+            return oldItem.startTime == newItem.startTime
         }
 
         override fun areContentsTheSame(oldItem: UpcomingEvent_, newItem: UpcomingEvent_): Boolean {
-            return oldItem == newItem
+            return oldItem.startTime == newItem.startTime && oldItem == newItem
         }
     }
 
@@ -92,11 +96,19 @@ class UpcomingMatchesAdapter : RecyclerView.Adapter<UpcomingMatchesAdapter.Image
 
             datetime.text = DateUtils.formatDate(formatedDate,"hh:mm aa")
 
+            linearLayout25.onSingleClick(){
+                onClickListener.onClick(currImage)
+            }
+
         }
     }
 
     override fun getItemCount() = differ.currentList.size
     override fun getItemViewType(position: Int): Int {
         return position
+    }
+
+    class OnClickListener(val clickListener: (event: UpcomingEvent_) -> Unit) {
+        fun onClick(event: UpcomingEvent_) = clickListener(event)
     }
 }

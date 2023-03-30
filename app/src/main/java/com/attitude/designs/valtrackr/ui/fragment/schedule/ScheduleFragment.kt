@@ -2,7 +2,6 @@ package com.attitude.designs.valtrackr.ui.fragment.schedule
 
 import DateUtils
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +31,14 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
     private lateinit var scheduledadapter : ScheduleMatchesAdapter
     private val viewModel: ScheduleViewModel by viewModels()
     var positionToScroll : Int = 0
+    val sheet = ItemListDialogFragment()
+
+
+    val listener = object: ItemListDialogFragment.OnActionCompleteListener {
+        override fun onActionComplete(str: String) {
+            viewModel.getAllSchedule()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,16 +54,12 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
         setupData()
 
         binding.filerIv.onSingleClick() {
-
-            val sheet = ItemListDialogFragment()
             sheet.show(childFragmentManager, "")
-
             childFragmentManager.executePendingTransactions()
-            sheet.dialog?.setOnDismissListener(DialogInterface.OnDismissListener {
-                println("Dissmissed")
-                viewModel.getAllSchedule()
-            })
+            sheet.setOnActionCompleteListener(listener)
+
         }
+
     }
 
     private fun setupData() {
@@ -65,7 +68,7 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
         scheduledadapter = ScheduleMatchesAdapter()
         binding.scheduleRevyclerview.apply {
             adapter = scheduledadapter
-            setHasFixedSize(true)
+            setHasFixedSize(false)
             isNestedScrollingEnabled = false
 
             ScrollAnimator.create()
@@ -155,7 +158,7 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
         activity?.lifecycle?.removeObserver(this)
         super.onDetach()
     }
-    fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {
+    private fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {
         val smoothScroller = object : LinearSmoothScroller(this.context) {
             override fun getVerticalSnapPreference(): Int = snapMode
             override fun getHorizontalSnapPreference(): Int = snapMode

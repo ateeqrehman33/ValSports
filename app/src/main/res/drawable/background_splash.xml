@@ -6,7 +6,7 @@
 
     <item
         android:gravity="center"
-        android:drawable="@drawable/logo_jett"
+        android:drawable="@drawable/logo_valsports"
         android:width="100dp"
         android:height="100dp"/>
 

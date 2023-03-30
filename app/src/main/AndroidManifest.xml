@@ -3,6 +3,8 @@
     package="com.attitude.designs.valtrackr">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
 
     <application
         android:name="com.attitude.designs.valtrackr.application.MyApplication"
@@ -25,6 +27,17 @@
 
         </activity>
 
+        <activity
+            android:name="com.attitude.designs.valtrackr.ui.fragment.newsdetails.WebViewActivity"
+            android:theme="@style/Theme.Webviwe"
+            android:label="Esports News"
+            android:noHistory="true"
+            android:exported="true">
+
+        </activity>
+
     </application>
+
+
 
 </manifest>

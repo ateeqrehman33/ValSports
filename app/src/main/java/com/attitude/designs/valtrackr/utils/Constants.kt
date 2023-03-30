@@ -13,8 +13,11 @@ object Constants {
     const val GET_SCHEDULE = "/persisted/val/getSchedule"
     const val GET_BRACKETS = "/persisted/val/getStandings"
     const val GET_LEAGUES = "/persisted/val/getLeaguesForStandings"
+    const val GET_NEWS = "https://cdn.contentstack.io/v3/content_types/articles/entries"
 
 
     const val BASE_URL = "https://esports-api.service.valorantesports.com"
+//    const val NEWS_BASE_URL = "https://cdn.contentstack.io"
+
     const val League_ID = "League_ID"
 }

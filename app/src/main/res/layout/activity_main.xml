@@ -34,6 +34,7 @@
             android:layout_gravity="bottom"
             android:background="@color/darknewbg"
             app:itemIconTint="@drawable/navigation_view_colored"
+            app:labelVisibilityMode="labeled"
             app:itemTextColor="@drawable/navigation_view_colored"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -34,26 +34,18 @@
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/merriweathersans_extrabold"
+                android:fontFamily="@font/valo_font"
                 android:text="Home League Filter"
                 android:textColor="@color/white"
+                android:layout_marginTop="3dp"
                 android:textSize="16dp"
+                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/closeIv"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/closeIv"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/close_ic"
-                android:paddingTop="3dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView3"
-                app:tint="@color/md_red_400" />
+
 
 
 
@@ -66,12 +58,13 @@
             android:id="@+id/leagueRv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_default="wrap"
             android:background="@color/valo_bg_color"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:visibility="visible"
+            android:layout_marginTop="2dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="wrap"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
             tools:listitem="@layout/fragment_item_list_dialog_list_dialog_item" />
@@ -121,6 +114,47 @@
                 <include layout="@layout/skeleton_league_filter_item" />
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Close"
+                android:textColor="@color/darknewbg"
+                android:id="@+id/btnClose"
+                android:textAllCaps="false"
+                android:layout_marginHorizontal="2dp"
+                android:fontFamily="@font/merriweathersans_semibold"
+                android:background="@color/md_red_300">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Apply"
+                android:id="@+id/btnApply"
+                android:textColor="@color/darknewbg"
+                android:textAllCaps="false"
+                android:layout_marginHorizontal="2dp"
+                android:fontFamily="@font/merriweathersans_semibold"
+                android:background="#FF03DAC5">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+
+        </LinearLayout>
 
 
 

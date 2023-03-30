@@ -10,18 +10,21 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.DefaultLifecycleObserver
-import com.google.android.material.chip.Chip
 import com.attitude.designs.valtrackr.R
 import com.attitude.designs.valtrackr.databinding.FragmentBracketsBinding
 import com.attitude.designs.valtrackr.model.brackets.*
 import com.attitude.designs.valtrackr.model.leagues.League_
 import com.attitude.designs.valtrackr.ui.adapter.RankingsAdapter
+import com.attitude.designs.valtrackr.utils.CheckInternet
+import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 import com.skydoves.powerspinner.IconSpinnerAdapter
 import com.skydoves.powerspinner.IconSpinnerItem
 import com.ventura.bracketslib.model.ColomnData
 import com.ventura.bracketslib.model.CompetitorData
 import com.ventura.bracketslib.model.MatchData
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.tonnyl.light.Light
 
 
 @AndroidEntryPoint
@@ -57,7 +60,12 @@ class BracketsFragment : Fragment(), DefaultLifecycleObserver {
             isNestedScrollingEnabled = false
         }
 
-        setupData()
+        if(CheckInternet.checkForInternet(requireContext())){
+            setupData()
+        }else{
+            Light.error(binding.root, "Not connected to internet, please check your connection.", Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun setupData() {

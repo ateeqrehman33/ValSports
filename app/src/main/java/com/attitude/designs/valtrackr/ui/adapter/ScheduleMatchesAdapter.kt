@@ -25,7 +25,7 @@ class ScheduleMatchesAdapter : RecyclerView.Adapter<ScheduleMatchesAdapter.Image
 
     private val diffCallback = object : DiffUtil.ItemCallback<Event_>() {
         override fun areItemsTheSame(oldItem: Event_, newItem: Event_): Boolean {
-            return oldItem.match.id == newItem.match.id
+            return oldItem.blockName == newItem.blockName
         }
 
         override fun areContentsTheSame(oldItem: Event_, newItem: Event_): Boolean {

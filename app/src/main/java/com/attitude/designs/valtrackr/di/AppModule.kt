@@ -33,6 +33,19 @@ object AppModule {
         }
         .build()
 
+    private val okHttpClientnews = OkHttpClient().newBuilder()
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        })
+        // Attempting to add headers to every request
+        .addInterceptor { chain ->
+            val request = chain.request().newBuilder()
+                .addHeader("api_key", "cs61908494445448f776bbdbc7")
+                .addHeader("access_token", "bltb730eada072bdbf4")
+            chain.proceed(request.build())
+        }
+        .build()
+
     @Provides
     @Singleton
     fun provideRetrofitInstance(BASE_URL: String): ImageService =
@@ -42,6 +55,7 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ImageService::class.java)
+
 
 
     @Singleton

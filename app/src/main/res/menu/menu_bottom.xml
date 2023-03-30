@@ -16,4 +16,9 @@
         android:title="@string/brackets"
         android:icon="@drawable/live_schedule_ic"/>
 
+    <item
+        android:id="@+id/news_fragment"
+        android:title="@string/news"
+        android:icon="@drawable/news_ic"/>
+
 </menu>
