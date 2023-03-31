@@ -1,58 +1,37 @@
-### Unsplash 👀 Image API 🖼
 
-![Screenshot](https://codersera.com/blog/wp-content/uploads/2021/03/learn-android-programming.png)
+# ValSports
 
-Unsplash Clone application; **Dagger Hilt**, **Coroutines**, **Lifecycle**, **LiveData**, **ViewModel**, **Retrofit**, **Coil** based on **MVVM** Architecture.
+Valosports is a Android App that provides users with the latest news, updates, and information about the popular game Valorant, as well as esports events and tournaments related to the game. Some of the main features of the app include:
 
-Photos taken from api are shown in the app. Image API: https://unsplash.com/developers 
+Live updates: Provides real-time updates and live streaming options for users to follow along with the matches as they happen.
 
-## Architecture 🏛
+Esports coverage: The App provides users with a schedule of upcoming matches, which includes information such as the teams that are playing, the date and time of the match, and the streaming platforms where users can watch the matches live. This feature allows users to plan ahead and ensure that they don't miss any important matches. Additionally, users can also set reminders for upcoming matches and receive notifications when the matches are about to start.
 
-**Model - View - ViewModel (MVVM)** is the industry recognized software architecture pattern that overcomes all drawbacks of MVP and MVC design patterns. MVVM suggests separating the data presentation logic(Views or UI) from the core business logic part of the application
+Standings and Brackets : he website provides users with information on the current standings and rankings of teams, as well as the results of matches and the progression of teams through brackets. This feature allows users to keep track of the progress of their favorite teams and players, and to see how they stack up against the competition. Additionally, users can also view historical data on past tournaments and events, and compare the performances of different teams and players over time. Overall, the website provides a comprehensive coverage of Valorant esports events and tournaments, with features that allow users to stay informed and engaged with the competitive scene, and to track the progress of their favorite teams and players.
 
-![Screenshot](https://androidwave.com/wp-content/uploads/2019/05/mvvm-architecture-app-in-android.png)
+News and Updates : The App covers a wide range of topics, including new content releases, patch notes, gameplay changes, and player/team news. The news articles are written by experienced writers and journalists who are knowledgeable about the game and the esports scene, and they provide insights and analysis that can help users stay informed and engaged.
 
 
-## Libraries 🛠 ⚙️
-![Screenshot](https://anteelo.com/wp-content/uploads/2021/05/Android-libraries.jpg)
-- [Kotlin](https://github.com/JetBrains/kotlin) -> The Kotlin Programming Language.
-- [Retrofit](https://github.com/square/retrofit) -> A type-safe HTTP client for Android and the JVM.
-- [OkHttp](https://github.com/square/okhttp) -> Square’s meticulous HTTP client for the JVM, Android, and GraalVM.
-- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) -> Library support for Kotlin coroutines
-- [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) -> Perform actions in response to a change in the lifecycle status of another component, such as activities and fragments.
-- [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) -> Hilt provides a standard way to incorporate Dagger dependency injection into an Android application.
-- [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) -> LiveData is an observable data holder class.
-- [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) -> ViewModel class is designed to store and manage UI-related data in a lifecycle conscious way.
-- [Coil](https://github.com/coil-kt/coil) -> Image loading for Android backed by Kotlin Coroutines.
 
-## Android 📱 Application Screens 📸
+## Screenshots
 
-<img src="https://github.com/halilozel1903/UnsplashExample/blob/master/screenshots/screen1.png" width="250" /> <img src="https://github.com/halilozel1903/UnsplashExample/blob/master/screenshots/screen2.png" width="250" />  <img src="https://github.com/halilozel1903/UnsplashExample/blob/master/screenshots/screen3.png" width="250" />
+![App Screenshot](https://iili.io/HO2JHPa.jpg)
 
-## License ℹ️
-```
-MIT License
 
-Copyright (c) 2022 Halil OZEL
+## Installation
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Install from the link below
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+https://install.appcenter.ms/users/ateeqrehman33-gmail.com/apps/valtrax/distribution_groups/production
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-# valorant_esports_tracker
-# valorant_esports_tracker
-# valorant_esports_tracker
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Tech Stack
+
+**Client:** Kotlin, Mvvm
+
+## API Reference
+https://valorantesports.com/
