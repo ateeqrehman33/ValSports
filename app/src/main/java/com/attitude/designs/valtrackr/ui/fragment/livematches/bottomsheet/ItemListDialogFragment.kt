@@ -28,7 +28,6 @@ class ItemListDialogFragment  : SuperBottomSheetFragment(), DefaultLifecycleObse
     private lateinit var leagueAdapter: FilterLeagueAdapter
     private lateinit var listener: OnActionCompleteListener
 
-
     fun setOnActionCompleteListener(listener: OnActionCompleteListener) {
         this.listener = listener
     }
@@ -43,85 +42,68 @@ class ItemListDialogFragment  : SuperBottomSheetFragment(), DefaultLifecycleObse
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-
-
         binding = FragmentItemListDialogListDialogBinding.inflate(layoutInflater)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         if(CheckInternet.checkForInternet(requireContext())){
 
-        leagueAdapter = FilterLeagueAdapter(context = requireContext())
+            leagueAdapter = FilterLeagueAdapter(context = requireContext())
 
+            binding.leagueRv.apply {
+                adapter = leagueAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
 
+            var tinyDB : TinyDB = TinyDB(context)
+            val list : ArrayList<String> = tinyDB.getListString(Constants.League_ID)
 
-        binding.leagueRv.apply {
-            adapter = leagueAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
-
-        var tinyDB : TinyDB = TinyDB(context)
-        val list : ArrayList<String> = tinyDB.getListString(Constants.League_ID)
-
-
-        viewModel.responseImages.observe(viewLifecycleOwner) { response ->
-            if (response != null && response.isNotEmpty()) {
-
-
-                if(list.isEmpty()){
-                    for(currImage in response){
-                            if(currImage.displayPriority.status == "force_selected" || currImage.displayPriority.status == "selected") {
-                                if(!list.contains(currImage.id)){
-                                    list.add(currImage.id)
+            viewModel.responseLeagues.observe(viewLifecycleOwner) { response ->
+                if (response != null && response.isNotEmpty()) {
+                    if(list.isEmpty()){
+                        for(currentItem in response){
+                                if(currentItem.displayPriority.status == "force_selected" || currentItem.displayPriority.status == "selected") {
+                                    if(!list.contains(currentItem.id)){
+                                        list.add(currentItem.id)
+                                    }
                                 }
-                            }
+                        }
+                        tinyDB.putListString(Constants.League_ID,list)
                     }
-                    tinyDB.putListString(Constants.League_ID,list)
+
+                    leagueAdapter.submitList(response)
+                    binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
+                    binding.leagueRv.visibility = View.VISIBLE
                 }
+                else{
 
-
-                leagueAdapter.submitList(response)
-                binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
-                binding.leagueRv.visibility = View.VISIBLE
+                }
             }
-            else{
 
+            binding.btnApply.onSingleClick(){
+                listener.onActionComplete("applied")
+                this.dismiss()
             }
-        }
 
-        binding.btnApply.onSingleClick(){
-            listener.onActionComplete("applied")
-            this.dismiss()
-        }
-
-        binding.btnClose.onSingleClick(){
-            this.dismiss()
-            tinyDB.clear()
-            tinyDB.putListString(Constants.League_ID,list)
-
-        }
+            binding.btnClose.onSingleClick(){
+                this.dismiss()
+                tinyDB.clear()
+                tinyDB.putListString(Constants.League_ID,list)
+            }
 
         }else{
             Light.error(binding.root, "Not connected to internet, please check your connection.", Snackbar.LENGTH_SHORT).show()
         }
-
     }
 
     override fun getBackgroundColor() = Color.BLACK
     override fun isSheetCancelable(): Boolean {
         return false
     }
-
     override fun isSheetAlwaysExpanded(): Boolean {
         return true
     }
-
-
-
-
-
 
 }

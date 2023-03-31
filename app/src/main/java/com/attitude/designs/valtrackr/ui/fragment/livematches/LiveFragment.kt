@@ -21,7 +21,7 @@ import cc.taylorzhang.singleclick.onSingleClick
 import com.attitude.designs.valtrackr.R
 import com.attitude.designs.valtrackr.databinding.FragmentLiveBinding
 import com.attitude.designs.valtrackr.model.unstarted.UpcomingEvent_
-import com.attitude.designs.valtrackr.ui.adapter.ImageAdapter
+import com.attitude.designs.valtrackr.ui.adapter.LiveMatchesAdapter
 import com.attitude.designs.valtrackr.ui.adapter.UpcomingMatchesAdapter
 import com.attitude.designs.valtrackr.ui.fragment.livematches.bottomsheet.ItemListDialogFragment
 import com.attitude.designs.valtrackr.utils.Constants
@@ -42,15 +42,10 @@ import java.util.concurrent.TimeUnit
 class LiveFragment : Fragment(), DefaultLifecycleObserver{
 
     private lateinit var binding: FragmentLiveBinding
-    private lateinit var imageAdapter: ImageAdapter
+    private lateinit var imageAdapter: LiveMatchesAdapter
     private lateinit var upcomingadapter : UpcomingMatchesAdapter
     private val viewModel: LiveViewModel by viewModels()
     val sheet = ItemListDialogFragment()
-
-
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,12 +65,6 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver{
 
         sheet.setOnActionCompleteListener(listener)
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         binding.ssPullRefresh.apply {
             setRefreshView(WaveAnimation(requireContext()))
             setGifAnimation(R.raw.jett)
@@ -87,21 +76,20 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver{
             }
         }
 
+        return binding.root
+    }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.threedots.setOnClickListener {
             showPopMenu(requireActivity(), it)
         }
 
-
         binding.filerIv.onSingleClick() {
             sheet.show(childFragmentManager, "")
             childFragmentManager.executePendingTransactions()
         }
-
-
-
 
         val tinyDB : TinyDB = TinyDB(context)
         val list : ArrayList<String> = tinyDB.getListString(Constants.League_ID)
@@ -109,21 +97,18 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver{
             sheet.show(childFragmentManager, "")
             childFragmentManager.executePendingTransactions()
         }
-
         setupRecyclerviews()
         subscribeToObservers()
-
     }
 
     private fun setupRecyclerviews(){
 
-        imageAdapter = ImageAdapter()
+        imageAdapter = LiveMatchesAdapter()
         binding.recyclerView.apply {
             adapter = imageAdapter
             setHasFixedSize(false)
             isNestedScrollingEnabled = false
         }
-
 
         upcomingadapter = UpcomingMatchesAdapter(UpcomingMatchesAdapter.OnClickListener{
             createNotification(it)
@@ -145,36 +130,26 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver{
 
     private fun subscribeToObservers() {
 
-
-
-        viewModel.responseImages.observe(requireActivity()) { response ->
+        viewModel.responseLiveMatches.observe(requireActivity()) { response ->
             if (response != null && response.isNotEmpty()) {
-
                 imageAdapter.submitList(response)
-                println("responseImages")
-
                 binding.rvUpcoming.postDelayed({
                     binding.shimmerFrameLayout.stopShimmer()
 
                     binding.shimmerFrameLayout.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
                 }, 1000)
-
             }
             else{
                 binding.recyclerView.visibility = View.GONE
                 binding.NodataView.visibility = View.VISIBLE
                 binding.shimmerFrameLayout.visibility = View.GONE
-
             }
         }
 
         viewModel.responseUpcoming.observe(requireActivity()) { response ->
             if (response != null) {
                 upcomingadapter.submitList(response)
-
-                println("responseUpcoming")
-
                 binding.rvUpcoming.postDelayed({
                     binding.shimmerFrameLayoutUpcoming.stopShimmer()
 
@@ -271,9 +246,7 @@ class LiveFragment : Fragment(), DefaultLifecycleObserver{
             .build()
 
         WorkManager.getInstance().enqueueUniqueWork(startTime, ExistingWorkPolicy.REPLACE, myWorkRequest)
-
         success(binding.recyclerView, "You will be notified when match starts.", Snackbar.LENGTH_SHORT).show()
     }
-
 
 }

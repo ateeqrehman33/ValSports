@@ -19,7 +19,6 @@ import java.util.*
 class FilterLeagueAdapter(private val context: Context): RecyclerView.Adapter<FilterLeagueAdapter.ImageViewHolder>() {
 
     private var mContext: Context = context
-
     inner class ImageViewHolder(val binding:FragmentItemListDialogListDialogItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -49,46 +48,34 @@ class FilterLeagueAdapter(private val context: Context): RecyclerView.Adapter<Fi
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val currImage = differ.currentList[position]
+        val currentItem = differ.currentList[position]
         val tinyDB = TinyDB(mContext)
 
 
         holder.binding.apply {
-
-
-            leagueIv.load(currImage.image){
+            
+            leagueIv.load(currentItem.image){
                 crossfade(true)
                 placeholder(R.drawable.valorant_masters_lightmode)
             }
-
-            leagueName.text = currImage.name
+            leagueName.text = currentItem.name
 
             val list : ArrayList<String> = tinyDB.getListString(Constants.League_ID)
-            leagueSwitch.isChecked = list.contains(currImage.id)
-
-
+            leagueSwitch.isChecked = list.contains(currentItem.id)
             leagueSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
 
                 val list : ArrayList<String> = tinyDB.getListString(Constants.League_ID)
-
                 if(isChecked){
-
-                    if(!list.contains(currImage.id)){
-                        list.add(currImage.id)
+                    if(!list.contains(currentItem.id)){
+                        list.add(currentItem.id)
                     }
-
                 }else{
-
-                    if(list.contains(currImage.id)){
-                        list.remove(currImage.id)
+                    if(list.contains(currentItem.id)){
+                        list.remove(currentItem.id)
                     }
-
                 }
-
                 tinyDB.putListString(Constants.League_ID,list)
-
             }
-
         }
     }
 

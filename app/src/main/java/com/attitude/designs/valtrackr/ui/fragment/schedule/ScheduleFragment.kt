@@ -57,14 +57,10 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
             sheet.show(childFragmentManager, "")
             childFragmentManager.executePendingTransactions()
             sheet.setOnActionCompleteListener(listener)
-
         }
-
     }
 
     private fun setupData() {
-
-
         scheduledadapter = ScheduleMatchesAdapter()
         binding.scheduleRevyclerview.apply {
             adapter = scheduledadapter
@@ -77,21 +73,15 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
                 .tillDuration(Animations.DURATION_FAST)
                 .playOnlyOnDownScroll(true)
                 .animate(this);
-
         }
-
-
 
         viewModel.responseImages.observe(requireActivity()) { response ->
             if (response != null) {
 
                 positionToScroll = getScrollPosition(response)
                 scheduledadapter.submitList(response)
-
-
                 binding.scheduleRevyclerview.postDelayed({
                     (binding.scheduleRevyclerview.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(positionToScroll, 0)
-
                     binding.shimmerFrameLayoutUpcoming.stopShimmer()
                     binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
                     binding.scheduleRevyclerview.visibility = View.VISIBLE
@@ -108,8 +98,6 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
 
             }
         }
-
-
     }
 
     private fun getScrollPosition(response: List<Event_>) : Int{
@@ -117,10 +105,7 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
         var position : Int = 0
 
         for (i in response.indices){
-
             try {
-
-
                 val formatedDate : Date = DateUtils.formatDate(response[i].startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
                 val nowDate : Date = DateUtils.now()
                 val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
@@ -137,14 +122,9 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
                     position = i // 2-4days
                     break
                 }
-
             }catch (e : Exception){
-
                 position  = 0
-
             }
-
-
         }
         return position
     }
@@ -166,6 +146,4 @@ class ScheduleFragment : Fragment(), DefaultLifecycleObserver {
         smoothScroller.targetPosition = position
         layoutManager?.startSmoothScroll(smoothScroller)
     }
-
-
 }

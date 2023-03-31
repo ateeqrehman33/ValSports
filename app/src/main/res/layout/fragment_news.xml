@@ -25,10 +25,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/valo_font"
-                android:text="News"
+                android:text="Esports Updates"
                 android:textColor="#FF03DAC5"
-                android:textSize="18dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,10 +91,6 @@
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </FrameLayout>

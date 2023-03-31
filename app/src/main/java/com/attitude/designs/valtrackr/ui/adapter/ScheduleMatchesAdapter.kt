@@ -49,36 +49,31 @@ class ScheduleMatchesAdapter : RecyclerView.Adapter<ScheduleMatchesAdapter.Image
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val currImage = differ.currentList[position]
+        val currentItem = differ.currentList[position]
         val context = holder.itemView.context
 
 
         holder.binding.apply {
 
-            title.text = currImage.league.name
+            title.text = currentItem.league.name
 
             try {
 
-                teamAname.text = currImage.match.teams[0].code
-                teamBname.text = currImage.match.teams[1].code
+                teamAname.text = currentItem.match.teams[0].code
+                teamBname.text = currentItem.match.teams[1].code
 
-                teamAiv.load(currImage.match.teams[0].image){
+                teamAiv.load(currentItem.match.teams[0].image){
                     crossfade(true)
                     placeholder(R.drawable.valorant_masters_lightmode)
-                    //transformations(CircleCropTransformation())
                 }
-                teamABiv.load(currImage.match.teams[1].image){
+                teamABiv.load(currentItem.match.teams[1].image){
                     crossfade(true)
                     placeholder(R.drawable.valorant_masters_lightmode)
-                    ///transformations(CircleCropTransformation())
                 }
 
-
-
-                val formatedDate : Date = DateUtils.formatDate(currImage.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
+                val formatedDate : Date = DateUtils.formatDate(currentItem.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
                 val nowDate : Date = DateUtils.now()
                 val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
-
 
 
                 if(DateUtils.isSameDaynew(formatedDate,nowDate)){
@@ -92,34 +87,34 @@ class ScheduleMatchesAdapter : RecyclerView.Adapter<ScheduleMatchesAdapter.Image
                     dateTitle.text = ""+DateUtils.formatDate(formatedDate,"EEEE")
                 }
                 else if(daysPassed in 4..10){
-                    dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd yyyy")
+                    dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd")
                 }
                 else{
-                    dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd yyyy")
+                    dateTitle.text = ""+DateUtils.formatDate(formatedDate,"MMM dd")
 
                 }
 
                 datetime.text = DateUtils.formatDate(formatedDate,"hh:mm aa")
                 dateYear.text = DateUtils.getYear(formatedDate).toString()
 
-                if(currImage.state == "completed"){
+                if(currentItem.state == "completed"){
                     scoreCons.visibility = View.VISIBLE
                     viewline.setBackgroundColor(ContextCompat.getColor(context,R.color.md_red_400))
 
-                    teamAscore.text = currImage.match.teams[0].result?.gameWins.toString()
-                    teamBscore.text = currImage.match.teams[1].result?.gameWins.toString()
+                    teamAscore.text = currentItem.match.teams[0].result?.gameWins.toString()
+                    teamBscore.text = currentItem.match.teams[1].result?.gameWins.toString()
 
-                    if(currImage.match.teams[0].result?.outcome.equals("win")){
+                    if(currentItem.match.teams[0].result?.outcome.equals("win")){
                         teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
                     }
-                    else if(currImage.match.teams[0].result?.outcome.equals("loss")){
+                    else if(currentItem.match.teams[0].result?.outcome.equals("loss")){
                         teamAWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
                     }
 
-                    if(currImage.match.teams[1].result?.outcome.equals("win")){
+                    if(currentItem.match.teams[1].result?.outcome.equals("win")){
                         teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_teal_400), android.graphics.PorterDuff.Mode.SRC_IN);
                     }
-                    else if(currImage.match.teams[1].result?.outcome.equals("loss")){
+                    else if(currentItem.match.teams[1].result?.outcome.equals("loss")){
                         teamBWin.setColorFilter(ContextCompat.getColor(context, R.color.md_red_400), android.graphics.PorterDuff.Mode.SRC_IN);
                     }
 

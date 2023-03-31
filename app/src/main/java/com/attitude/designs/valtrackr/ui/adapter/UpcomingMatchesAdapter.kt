@@ -21,10 +21,6 @@ class UpcomingMatchesAdapter(private val onClickListener: OnClickListener) : Rec
     inner class ImageViewHolder(val binding:UpcomingMatchItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-
-
-
-
     private val diffCallback = object : DiffUtil.ItemCallback<UpcomingEvent_>() {
         override fun areItemsTheSame(oldItem: UpcomingEvent_, newItem: UpcomingEvent_): Boolean {
             return oldItem.startTime == newItem.startTime
@@ -51,29 +47,26 @@ class UpcomingMatchesAdapter(private val onClickListener: OnClickListener) : Rec
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val currImage = differ.currentList[position]
+        val currentItem = differ.currentList[position]
 
         holder.binding.apply {
 
-            title.text = currImage.league.name
+            title.text = currentItem.league.name
 
 
-                teamAname.text = currImage.match.teams[0].code
-                teamBname.text = currImage.match.teams[1].code
+                teamAname.text = currentItem.match.teams[0].code
+                teamBname.text = currentItem.match.teams[1].code
 
-                teamAiv.load(currImage.match.teams[0].image){
+                teamAiv.load(currentItem.match.teams[0].image){
                     crossfade(true)
                     placeholder(R.drawable.valorant_masters_lightmode)
-                    //transformations(CircleCropTransformation())
-
                 }
-                teamABiv.load(currImage.match.teams[1].image){
+                teamABiv.load(currentItem.match.teams[1].image){
                     crossfade(true)
                     placeholder(R.drawable.valorant_masters_lightmode)
-                    ///transformations(CircleCropTransformation())
                 }
 
-            var formatedDate : Date = DateUtils.formatDate(currImage.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
+            var formatedDate : Date = DateUtils.formatDate(currentItem.startTime,"yyyy-MM-dd'T'HH:mm:ss'Z'")
             val nowDate : Date = DateUtils.now()
             val daysPassed : Int = DateUtils.getDiffinDays(nowDate,formatedDate)
 
@@ -97,7 +90,7 @@ class UpcomingMatchesAdapter(private val onClickListener: OnClickListener) : Rec
             datetime.text = DateUtils.formatDate(formatedDate,"hh:mm aa")
 
             linearLayout25.onSingleClick(){
-                onClickListener.onClick(currImage)
+                onClickListener.onClick(currentItem)
             }
 
         }

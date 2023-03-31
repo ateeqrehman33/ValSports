@@ -1,5 +1,6 @@
 package com.attitude.designs.valtrackr.ui.adapter
 
+import DateUtils
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import coil.load
 import com.attitude.designs.valtrackr.R
 import com.attitude.designs.valtrackr.databinding.NewsItemBinding
 import com.attitude.designs.valtrackr.model.news.Entry
+import com.github.sisyphsu.dateparser.DateParserUtils
 import java.util.*
 
 
@@ -47,20 +49,22 @@ class NewsAdapter(private val onClickListener: OnClickListener) : RecyclerView.A
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val currImage = differ.currentList[position]
+        val currentItem = differ.currentList[position]
 
         holder.binding.apply {
 
-            title.text = currImage.title
+            title.text = currentItem.title
 
-            banneriv.load(currImage.bannerSettings.banner?.url){
+            banneriv.load(currentItem.bannerSettings.banner?.url){
                 crossfade(true)
                 placeholder(R.drawable.valorant_masters_lightmode)
             }
 
-
+            val date = DateParserUtils.parseDate(currentItem.bannerSettings.banner?.publishDetails?.time)
+            datee.text = ""+DateUtils.formatDate(date,"MMM dd yyyy")
+            
             holder.itemView.onSingleClick(){
-                onClickListener.onClick(currImage)
+                onClickListener.onClick(currentItem)
             }
         }
     }

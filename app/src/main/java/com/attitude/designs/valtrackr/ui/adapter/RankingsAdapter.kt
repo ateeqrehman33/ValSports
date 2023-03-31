@@ -15,9 +15,7 @@ import java.util.*
 
 
 class RankingsAdapter(private val context: Context): RecyclerView.Adapter<RankingsAdapter.ImageViewHolder>() {
-
-    private var mContext: Context = context
-
+    
     inner class ImageViewHolder(val binding:RankingsItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -47,23 +45,17 @@ class RankingsAdapter(private val context: Context): RecyclerView.Adapter<Rankin
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val currImage = differ.currentList[position]
+        val currentItem = differ.currentList[position]
         
         holder.binding.apply {
-
-
-            teamAiv.load(currImage.image){
+            teamAiv.load(currentItem.image){
                 crossfade(true)
                 placeholder(R.drawable.valorant_masters_lightmode)
             }
-
-            title.text = currImage.name
-
-            ordinal.text = currImage.ordinal
-
-            teamAname.text = currImage.record.wins.toString()+"W - "+currImage.record.losses.toString()+"L"
-
-       
+            title.text = currentItem.name
+            ordinal.text = currentItem.ordinal
+            teamAname.text = currentItem.record.wins.toString()+"W - "+currentItem.record.losses.toString()+"L"
+            
         }
     }
 

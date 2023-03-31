@@ -1,12 +1,6 @@
 package com.attitude.designs.valtrackr.utils
 
 object Constants {
-    const val CLIENT_ID = "q-LLFiRQ_HHpB4KEtE05ISWlKt8UHiGKmKJkQFMjqec"
-//    const val END_POINT = "/livematches.json"
-//    const val BASE_URL = "https://taskmotech1b.s3.ap-south-1.amazonaws.com"
-    const val VERSION = "v1"
-    const val ACCEPT_VERSION = "Accept-Version"
-    const val AUTHORIZATION = "Authorization: Client-ID"
 
     const val GET_LIVE_DETAILS = "/persisted/val/getLiveDetails"
     const val GET_EVENT_LIST = "/persisted/val/getEventList"
@@ -14,10 +8,6 @@ object Constants {
     const val GET_BRACKETS = "/persisted/val/getStandings"
     const val GET_LEAGUES = "/persisted/val/getLeaguesForStandings"
     const val GET_NEWS = "https://cdn.contentstack.io/v3/content_types/articles/entries"
-
-
     const val BASE_URL = "https://esports-api.service.valorantesports.com"
-//    const val NEWS_BASE_URL = "https://cdn.contentstack.io"
-
     const val League_ID = "League_ID"
 }

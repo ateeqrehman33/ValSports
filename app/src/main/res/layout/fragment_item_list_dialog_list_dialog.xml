@@ -14,7 +14,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/md_red_A100"
+            android:background="@color/valo_red"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -44,15 +44,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/leagueRv"
@@ -98,19 +90,14 @@
                 <include layout="@layout/skeleton_league_filter_item" />
                 <include layout="@layout/skeleton_league_filter_item" />
                 <include layout="@layout/skeleton_league_filter_item" />
-
                 <include layout="@layout/skeleton_league_filter_item" />
                 <include layout="@layout/skeleton_league_filter_item" />
                 <include layout="@layout/skeleton_league_filter_item" />
                 <include layout="@layout/skeleton_league_filter_item" />
                 <include layout="@layout/skeleton_league_filter_item" />
                 <include layout="@layout/skeleton_league_filter_item" />
-
-
                 <include layout="@layout/skeleton_league_filter_item" />
-
                 <include layout="@layout/skeleton_league_filter_item" />
-
                 <include layout="@layout/skeleton_league_filter_item" />
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -130,12 +117,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Close"
-                android:textColor="@color/darknewbg"
+                android:textColor="@color/white"
                 android:id="@+id/btnClose"
                 android:textAllCaps="false"
                 android:layout_marginHorizontal="2dp"
                 android:fontFamily="@font/merriweathersans_semibold"
-                android:background="@color/md_red_300">
+                android:background="@color/valo_red">
 
             </androidx.appcompat.widget.AppCompatButton>
 
@@ -153,13 +140,6 @@
 
             </androidx.appcompat.widget.AppCompatButton>
 
-
         </LinearLayout>
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </FrameLayout>

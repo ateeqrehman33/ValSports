@@ -5,5 +5,10 @@
     <string name="brackets">Standings</string>
     <string name="news">News</string>
 
-    <string name="bio">I\'m an Android developer with over 4 years of experience working for a product-based company. Throughout my career, I\'ve developed a deep understanding of the Android platform and have gained expertise in programming languages such as Java and Kotlin.\n\nAside from my work, I\'m an avid gamer and a big fan of Valorant. In my free time, I love to play games and keep up with the latest gaming trends. My passion for gaming has also led me to develop this app, and I\'m always eager to learn new skills and techniques to improve my craft.</string>
+    <string name="instalink">https://instagram.com/ateeq.rehman33</string>
+    <string name="linkidinlink">https://www.linkedin.com/in/ateeq-rehman-013a08144</string>
+    <string name="githublink">https://github.com/ateeqrehman33</string>
+
+
+    <string name="bio">I\'m an Android developer with over 4 years of experience working for a product-based company. Throughout my career, I\'ve developed a deep understanding of the Android platform and have gained expertise in programming languages such as Java and Kotlin.\n\nAside from my work, I\'m an avid gamer and a big fan of Valorant. In my free time, I love to play games and keep up with the latest gaming trends. My passion for gaming has also led me to develop this app, and I\'m always eager to learn new skills and techniques to improve my craft.\n\n Leave the feedback at ateeqrehman33@gmail.com</string>
 </resources>

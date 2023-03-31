@@ -28,8 +28,6 @@ class NewsFragment : Fragment(), DefaultLifecycleObserver {
     private lateinit var newsAdapter : NewsAdapter
     private val viewModel: NewsViewModel by viewModels()
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,14 +49,10 @@ class NewsFragment : Fragment(), DefaultLifecycleObserver {
 
     private fun setupData() {
 
-
         newsAdapter = NewsAdapter(NewsAdapter.OnClickListener{
-           // Navigation.findNavController(requireView()).navigate(R.id.webview_fragment)
-
             val intent = Intent(requireActivity(), WebViewActivity::class.java)
             intent.putExtra("url","https://valorantesports.com"+it.url.url.toString())
             intent.putExtra("title",it.title.toString())
-
             startActivity(intent)
 
         })
@@ -76,9 +70,7 @@ class NewsFragment : Fragment(), DefaultLifecycleObserver {
 
         }
 
-
-
-        viewModel.responseImages.observe(requireActivity()) { response ->
+        viewModel.responseNews.observe(requireActivity()) { response ->
             if (response != null) {
 
                 newsAdapter.submitList(response)
@@ -94,11 +86,8 @@ class NewsFragment : Fragment(), DefaultLifecycleObserver {
             else{
                 binding.scheduleRevyclerview.visibility = View.GONE
                 binding.shimmerFrameLayoutUpcoming.visibility = View.GONE
-
             }
         }
-
-
     }
 
 

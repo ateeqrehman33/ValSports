@@ -50,24 +50,9 @@
         android:label="News"
         tools:layout="@layout/fragment_news" >
 
-
-        <action
-            android:id="@+id/action_news_fragment_to_webview_fragment"
-            app:destination="@id/webview_fragment" />
-
     </fragment>
 
-    <fragment
-        android:id="@+id/webview_fragment"
-        android:name="com.attitude.designs.valtrackr.ui.fragment.newsdetails.WebViewFragment"
-        android:label="News Details"
-        tools:layout="@layout/fragment_web_view" >
 
-        <argument
-            android:name="url"
-            app:argType="string" />
-
-    </fragment>
 
 
 </navigation>

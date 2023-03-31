@@ -34,15 +34,13 @@ class WebViewActivity : AppCompatActivity(){
         setContentView(binding.root)
 
 
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar()?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayShowHomeEnabled(true);
 
         val extras = intent.extras
         if (extras != null) {
            URL = extras.getString("url").toString()
            titles = extras.getString("title").toString()
-
-            // do something with the customer
         }
 
         supportActionBar?.title = titles;
@@ -116,8 +114,4 @@ class WebViewActivity : AppCompatActivity(){
         }
         dialog.create().show()
     }
-
-
-
-
 }

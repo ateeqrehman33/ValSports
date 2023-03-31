@@ -100,7 +100,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/valo_font"
                     android:text="Live Matches"
-                    android:textColor="@color/md_red_300"
+                    android:textColor="@color/valo_red"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +207,7 @@
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/valo_font"
                     android:text="UPCOMING"
-                    android:textColor="@color/md_red_300"
+                    android:textColor="@color/valo_red"
                     android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -261,26 +261,16 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="8dp">
-
-                        <include layout="@layout/skeleton_upcoming_match_item" />
-
-                        <include layout="@layout/skeleton_upcoming_match_item" />
-
                         <include layout="@layout/skeleton_upcoming_match_item" />
                         <include layout="@layout/skeleton_upcoming_match_item" />
                         <include layout="@layout/skeleton_upcoming_match_item" />
-
-
+                        <include layout="@layout/skeleton_upcoming_match_item" />
+                        <include layout="@layout/skeleton_upcoming_match_item" />
                         <include layout="@layout/skeleton_upcoming_match_item" />
                     </LinearLayout>
                 </com.facebook.shimmer.ShimmerFrameLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </androidx.core.widget.NestedScrollView>
     </com.simform.refresh.SSPullToRefreshLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

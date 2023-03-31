@@ -1,6 +1,8 @@
 package com.attitude.designs.valtrackr.ui.fragment.aboutdev
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.navigation.Navigation
+import cc.taylorzhang.singleclick.onSingleClick
 import com.attitude.designs.valtrackr.R
 import com.attitude.designs.valtrackr.databinding.FragmentMemberDetailBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -37,6 +40,24 @@ class AboutDevFragment : Fragment(), DefaultLifecycleObserver {
             Navigation.findNavController(view).navigateUp()
         }
 
+        binding.imageViewGithubIcon.onSingleClick(){
+            goToUrl(getString(R.string.githublink))
+        }
+
+        binding.imageViewLinkedInIcon.onSingleClick(){
+            goToUrl(getString(R.string.linkidinlink))
+        }
+
+        binding.imageViewinstaIcon.onSingleClick(){
+            goToUrl(getString(R.string.instalink))
+        }
+
+    }
+
+    private fun goToUrl(url: String) {
+        val uriUrl = Uri.parse(url)
+        val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
+        startActivity(launchBrowser)
     }
 
     override fun onAttach(context: Context) {

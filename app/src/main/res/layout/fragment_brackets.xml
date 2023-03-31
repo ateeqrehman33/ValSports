@@ -8,8 +8,6 @@
     android:id="@+id/rootCont"
     android:layout_height="match_parent">
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,9 +30,10 @@
                 android:fontFamily="@font/valo_font"
                 android:text="Standings"
                 android:textColor="#FF03DAC5"
-                android:textSize="18dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,13 +85,12 @@
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toBottomOf="@+id/view1"/>
 
-                        <View
-                            android:id="@+id/view2"
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:background="@color/darknewbg"
-                            app:layout_constraintTop_toBottomOf="@+id/dropdown_league" />
-
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/darknewbg"
+                app:layout_constraintTop_toBottomOf="@+id/dropdown_league" />
 
             <com.skydoves.powerspinner.PowerSpinnerView
                 android:id="@+id/dropdown_tournament"
@@ -202,12 +200,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </com.google.android.material.card.MaterialCardView>
-
-
-
-
 
         <com.ventura.bracketslib.BracketsView
             android:id="@+id/bracket_view"
@@ -220,8 +213,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chip_group2" />
-
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rankingsRevyclerview"
@@ -249,12 +240,6 @@
             app:lottie_loop="true"
             app:lottie_speed="1" />
 
-
-        <!--        <com.ventura.bracketslib.BracketsView-->
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </FrameLayout>

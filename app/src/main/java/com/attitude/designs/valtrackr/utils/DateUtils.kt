@@ -57,6 +57,19 @@ object DateUtils {
         return result!!
     }
 
+    @SuppressLint("SimpleDateFormat")
+    @Throws(ParseException::class)
+    fun formatDateCatch(dateStr: String?, formatStr: String?): Date {
+
+        val formatter = SimpleDateFormat(formatStr?: DEFAULT_FORMAT_DATE, Locale.US)
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        val result = formatter.parse(dateStr!!)
+        return result!!
+    }
+
+
+
+
     fun formatTime(dateStr: String?): Timestamp {
         return Timestamp.valueOf(dateStr)
     }

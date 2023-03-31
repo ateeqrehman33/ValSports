@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/about_dev"
-        android:icon="@drawable/developer"
+        android:icon="@drawable/profile_pic"
         android:title="About Developer"/>
 
 </menu>

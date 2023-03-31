@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.attitude.designs.valtrackr.model.livematches.Event_
 import com.attitude.designs.valtrackr.model.unstarted.UpcomingEvent_
-import com.attitude.designs.valtrackr.repository.ImageRepository
+import com.attitude.designs.valtrackr.repository.ValoRepository
 import com.attitude.designs.valtrackr.utils.Constants
 import com.attitude.designs.valtrackr.utils.TinyDB
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,9 +17,9 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class LiveViewModel @Inject constructor(private val repository: ImageRepository, context: Context) : ViewModel() {
+class LiveViewModel @Inject constructor(private val repository: ValoRepository, context: Context) : ViewModel() {
     private val _response = MutableLiveData<List<Event_>>()
-    val responseImages: LiveData<List<Event_>> get() = _response
+    val responseLiveMatches: LiveData<List<Event_>> get() = _response
 
 
     private val upcoming_response = MutableLiveData<List<UpcomingEvent_>>()
@@ -27,15 +27,13 @@ class LiveViewModel @Inject constructor(private val repository: ImageRepository,
 
     private var tinyDB : TinyDB = TinyDB(context)
 
-
-
     init {
         getAllImages()
         getUpcomingMatches()
     }
 
     fun getAllImages() = viewModelScope.launch {
-        repository.getAllImages().let { response ->
+        repository.getLiveEvents().let { response ->
             if (response.isSuccessful) {
                 _response.postValue(response.body()!!.data.schedule.events)
 

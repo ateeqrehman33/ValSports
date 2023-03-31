@@ -16,7 +16,6 @@ import com.attitude.designs.valtrackr.ui.fragment.aboutdev.AboutDevFragment
 import com.attitude.designs.valtrackr.ui.fragment.brackets.BracketsFragment
 import com.attitude.designs.valtrackr.ui.fragment.livematches.LiveFragment
 import com.attitude.designs.valtrackr.ui.fragment.news.NewsFragment
-import com.attitude.designs.valtrackr.ui.fragment.newsdetails.WebViewFragment
 import com.attitude.designs.valtrackr.ui.fragment.schedule.ScheduleFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.microsoft.appcenter.AppCenter
@@ -32,12 +31,9 @@ class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-
-
         setView()
     }
 
@@ -73,30 +69,17 @@ class MainActivity : AppCompatActivity(){
                     setCurrentFragment(NewsFragment())
                     true
                 }
-                R.id.webview_fragment-> {
-                    setCurrentFragment(WebViewFragment())
-                    true
-                }
-
                 else->{
                     false
                 }
-
             }
             return@setOnItemSelectedListener true
         }
-
-        navView.setOnItemReselectedListener {
-
-        }
-
-
+        navView.setOnItemReselectedListener {}
         AppCenter.start(
             application, "d66153b1-65b7-4c7c-aa72-e636f48e0a0a",
             Analytics::class.java, Crashes::class.java
         )
-
-
     }
 
 
@@ -105,7 +88,6 @@ class MainActivity : AppCompatActivity(){
             replace(R.id.fragNavHost, fragment)
             commit()
         }
-
 
     private var backPressedOnce = false
 
@@ -117,10 +99,8 @@ class MainActivity : AppCompatActivity(){
                 super.onBackPressed()
                 return
             }
-
             backPressedOnce = true
             Toast.makeText(this, "Press BACK again to exit", Toast.LENGTH_SHORT).show()
-
             Handler().postDelayed(2000) {
                 backPressedOnce = false
             }
@@ -129,11 +109,5 @@ class MainActivity : AppCompatActivity(){
             super.onBackPressed()
         }
     }
-
-    fun setBottomNavigationVisibility(visibility: Int) {
-        // get the reference of the bottomNavigationView and set the visibility.
-        binding.bottomNavView.visibility = visibility
-    }
-
 }
 

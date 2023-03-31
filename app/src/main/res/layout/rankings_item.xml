@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/merriweathersans_semibold"
             android:text="0"
-            android:textColor="@color/colorVeil"
+            android:textColor="@color/valo_red"
             android:textSize="16dp"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
