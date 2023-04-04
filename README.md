@@ -20,7 +20,9 @@ News and Updates : The App covers a wide range of topics, including new content 
 
 ## Installation
 
-Install from the link below
+Install from the links below
+
+https://drive.google.com/file/d/18dTmfXXCaIx_UtgojDOgvy1ME6G8CKzv/view?usp=share_link
 
 https://install.appcenter.ms/users/ateeqrehman33-gmail.com/apps/valtrax/distribution_groups/production
 
