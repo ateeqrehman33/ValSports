@@ -22,9 +22,7 @@ News and Updates : The App covers a wide range of topics, including new content 
 
 Install from the links below
 
-https://drive.google.com/file/d/18dTmfXXCaIx_UtgojDOgvy1ME6G8CKzv/view?usp=share_link
-
-https://install.appcenter.ms/users/ateeqrehman33-gmail.com/apps/valtrax/distribution_groups/production
+https://drive.google.com/file/d/19C_EdB-20LkNP4EabhSF-9ZiPk-q3hOw/view?usp=share_link
 
 ## License
 
