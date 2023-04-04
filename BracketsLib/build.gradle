@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/tmblr1021l0045/Desktop/valsports/keys')
+            storePassword 'Ateeq@teeq33'
+            keyAlias 'ValSports'
+            keyPassword 'Ateeq@teeq33'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -14,6 +22,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
