@@ -22,8 +22,7 @@ News and Updates : The App covers a wide range of topics, including new content 
 
 Install from the links below
 
-https://drive.google.com/file/d/1WY0Lj4W_bLoC283prSCiWLB5QnzbNrFY/view?usp=share_link
-
+https://drive.google.com/file/d/19a4EwAHNoSftGyuaXf704z6eEiHspq0V/view?usp=share_link
 
 ## License
 

@@ -28,6 +28,8 @@ android {
             storePassword "Ateeq@teeq33"
             keyAlias "Valsports"
             keyPassword "Ateeq@teeq33"
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
 
