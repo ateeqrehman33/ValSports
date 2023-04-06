@@ -3,6 +3,11 @@
 # ValSports -One Stop Solution for all Valorant Esports Tracking
 
 
+## Screenshots
+
+![App Screenshot](https://iili.io/HO2JHPa.jpg)
+
+
 ## Video
 
 https://user-images.githubusercontent.com/46771978/230305689-b296e71d-6a18-49d6-a705-811732223485.mp4
@@ -14,11 +19,6 @@ https://user-images.githubusercontent.com/46771978/230305689-b296e71d-6a18-49d6-
 Install from the links below
 
 https://install.appcenter.ms/users/ateeqrehman33-gmail.com/apps/valtrax/distribution_groups/production
-
-
-## Screenshots
-
-![App Screenshot](https://iili.io/HO2JHPa.jpg)
 
 
 # About ValSports
@@ -34,11 +34,8 @@ Standings and Brackets : he website provides users with information on the curre
 News and Updates : The App covers a wide range of topics, including new content releases, patch notes, gameplay changes, and player/team news. The news articles are written by experienced writers and journalists who are knowledgeable about the game and the esports scene, and they provide insights and analysis that can help users stay informed and engaged.
 
 
-## Tech Stack
-
-**Client:** Kotlin, Mvvm
-
 ## API Reference
+
 https://valorantesports.com/
 
 
