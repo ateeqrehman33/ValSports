@@ -1,5 +1,15 @@
 
+
 # ValSports
+
+
+## Screenshots
+
+![App Screenshot](https://iili.io/HO2JHPa.jpg)
+
+
+# About ValSports
+
 
 Valosports is a Android App that provides users with the latest news, updates, and information about the popular game Valorant, as well as esports events and tournaments related to the game. Some of the main features of the app include:
 
@@ -13,9 +23,7 @@ News and Updates : The App covers a wide range of topics, including new content 
 
 
 
-## Screenshots
 
-![App Screenshot](https://iili.io/HO2JHPa.jpg)
 
 
 ## Installation
@@ -23,11 +31,6 @@ News and Updates : The App covers a wide range of topics, including new content 
 Install from the links below
 
 https://install.appcenter.ms/users/ateeqrehman33-gmail.com/apps/valtrax/distribution_groups/production
-
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
 
 
 ## Tech Stack
