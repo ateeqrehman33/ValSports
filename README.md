@@ -1,17 +1,16 @@
 
 
-# ValSports -One Stop Solution for all Valorant Esports Tracking
+# ValSports - A One Stop Solution for all Valorant Esports Community
+
+
+## Video Preview
+
+https://user-images.githubusercontent.com/46771978/230305689-b296e71d-6a18-49d6-a705-811732223485.mp4
 
 
 ## Screenshots
 
 ![App Screenshot](https://iili.io/HO2JHPa.jpg)
-
-
-## Video
-
-https://user-images.githubusercontent.com/46771978/230305689-b296e71d-6a18-49d6-a705-811732223485.mp4
-
 
 
 ## Installation
