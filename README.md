@@ -61,6 +61,14 @@ https://valorantesports.com/
 - [Lottie for Android](https://github.com/airbnb/lottie-android) -Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile!
 
 
+<h2> 💬  &nbsp;Feedbacks!</h2>
+
+![IMG_3411](https://user-images.githubusercontent.com/46771978/231679034-c27df8c7-54ca-443c-b8ea-e450201f1ce6.jpg)
+![IMG_3412](https://user-images.githubusercontent.com/46771978/231679055-69aada60-7296-4c4d-87c1-17364c395ac9.jpg)
+![IMG_3413](https://user-images.githubusercontent.com/46771978/231679073-7af4ff7c-7151-4bc7-ab08-eeadd43fa553.jpg)
+![IMG_3414](https://user-images.githubusercontent.com/46771978/231679091-39d49719-11fb-421b-a221-19f89bdbd5eb.jpg)
+
+  
 
 ## License
 
