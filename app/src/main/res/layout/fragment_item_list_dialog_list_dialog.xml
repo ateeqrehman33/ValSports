@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/valo_bg_color"
+    tools:context=".ui.fragment.schedule.ScheduleFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/valo_red"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/darknewbgsec"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/valo_font"
+                android:text="Home League Filter"
+                android:textColor="@color/white"
+                android:layout_marginTop="3dp"
+                android:textSize="16dp"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/leagueRv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/valo_bg_color"
+            android:visibility="visible"
+            android:layout_marginTop="2dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            tools:listitem="@layout/fragment_item_list_dialog_list_dialog_item" />
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayoutUpcoming"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            android:visibility="visible"
+            app:shimmer_auto_start="true">
+
+            <!-- Adding 15 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+                <include layout="@layout/skeleton_league_filter_item" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Close"
+                android:textColor="@color/white"
+                android:id="@+id/btnClose"
+                android:textAllCaps="false"
+                android:layout_marginHorizontal="2dp"
+                android:fontFamily="@font/merriweathersans_semibold"
+                android:background="@color/valo_red">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Apply"
+                android:id="@+id/btnApply"
+                android:textColor="@color/darknewbg"
+                android:textAllCaps="false"
+                android:layout_marginHorizontal="2dp"
+                android:fontFamily="@font/merriweathersans_semibold"
+                android:background="#FF03DAC5">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

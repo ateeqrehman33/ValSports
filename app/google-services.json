@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "131820650417",
+    "project_id": "valtrackr",
+    "storage_bucket": "valtrackr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131820650417:android:47b8d399362376a1de4790",
+        "android_client_info": {
+          "package_name": "com.attitude.designs.valtrackr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131820650417-s4ea8potbhbd737e6h24km20nl39lodb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN4K1f_p_rY5Og4TMwi9xPtMV_RWXUlGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131820650417-s4ea8potbhbd737e6h24km20nl39lodb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

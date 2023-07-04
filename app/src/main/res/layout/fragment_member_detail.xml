@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_detail_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darknewbgsec"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="16dp"
+        android:background="@color/darknewbgsec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/valo_font"
+            android:text="About Developer"
+            android:textColor="#FF03DAC5"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/filerIv"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/close_ic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorVeil" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/imageViewinstaIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/instagram"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLinkedInIcon"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewLinkedInIcon"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLinkedInIcon" />
+
+
+
+    <ImageView
+        android:id="@+id/imageViewLinkedInIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_linkedln"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMemberTitle"
+        app:tint="#0072b1" />
+
+    <ImageView
+        android:id="@+id/imageViewGithubIcon"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_github"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLinkedInIcon"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMemberTitle"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewMemberTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@color/darknewbgsec"
+        android:gravity="center"
+        android:fontFamily="@font/merriweathersans_regular"
+        android:padding="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/valo_red"
+        android:text="Android Lead"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewMemberPhoto"
+        />
+
+    <TextView
+        android:id="@+id/textViewMemberName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@color/darknewbgsec"
+        android:gravity="center"
+        android:text="Ateeq Rehman"
+        android:fontFamily="@font/merriweathersans_bold"
+        android:padding="8dp"
+        android:textColor="@color/md_cyan_A700"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewMemberPhoto" />
+
+    <TextView
+        android:id="@+id/textViewMemberBio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:fontFamily="@font/merriweathersans_semibold"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:text="@string/bio"
+        android:textColor="@color/md_blue_grey_100"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLinkedInIcon" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewMemberPhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:civ_border_color="@color/black"
+        android:layout_marginTop="32dp"
+        app:civ_border_width="2dp"
+        android:src="@drawable/profile_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+
+    <TextView
+        android:id="@+id/textViewMemsberTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/darknewbgsec"
+        android:fontFamily="@font/merriweathersans_regular"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Version : 1.0"
+        android:textColor="@color/md_blue_grey_400"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

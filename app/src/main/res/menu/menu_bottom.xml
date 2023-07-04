@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/live_fragment"
+        android:title="@string/live"
+        android:icon="@drawable/live_bottom_ic"/>
+
+    <item
+        android:id="@+id/schedule_fragment"
+        android:title="@string/schedule"
+        android:icon="@drawable/schedule_icon"/>
+
+    <item
+        android:id="@+id/bracket_fragment"
+        android:title="@string/brackets"
+        android:icon="@drawable/live_schedule_ic"/>
+
+    <item
+        android:id="@+id/news_fragment"
+        android:title="@string/news"
+        android:icon="@drawable/news_ic"/>
+
+</menu>

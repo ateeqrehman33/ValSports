@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/live_fragment">
+
+    <fragment
+        android:id="@+id/live_fragment"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.livematches.LiveFragment"
+        android:label="Live"
+        tools:layout="@layout/fragment_live" >
+
+        <action
+            android:id="@+id/action_live_to_aboutdev"
+            app:destination="@id/about_dev" />
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/schedule_fragment"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.schedule.ScheduleFragment"
+        android:label="Schedule"
+        tools:layout="@layout/fragment_schedule" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/bracket_fragment"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.brackets.BracketsFragment"
+        android:label="Standings"
+        tools:layout="@layout/fragment_brackets" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/about_dev"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.aboutdev.AboutDevFragment"
+        android:label="About Dev"
+        tools:layout="@layout/fragment_member_detail" >
+
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/news_fragment"
+        android:name="com.attitude.designs.valtrackr.ui.fragment.news.NewsFragment"
+        android:label="News"
+        tools:layout="@layout/fragment_news" >
+
+    </fragment>
+
+
+
+
+</navigation>
